@@ -1,4 +1,7 @@
 import connection.MySQLConnection;
+import telas.CadastroProduto;
+
+import javax.swing.*;
 
 public class Main {
     public static void main(String[] args) {
@@ -7,8 +10,15 @@ public class Main {
         connection.getConnection();
         System.out.println("Connection established: " + (connection.getConnection() != null));
 
-        // Close the connection
-        connection.closeConnection();
-        System.out.println("Connection closed.");
+        SwingUtilities.invokeLater(() -> {
+            JFrame frame = new JFrame("Mercado Três Irmãos");
+            CadastroProduto cadastroProduto = new CadastroProduto();
+
+            frame.setContentPane(cadastroProduto.getBackground());
+            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            frame.pack();
+            frame.setLocationRelativeTo(null);
+            frame.setVisible(true);
+        });
     }
 }
