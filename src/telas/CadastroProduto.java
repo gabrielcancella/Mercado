@@ -7,7 +7,7 @@ import java.awt.event.ActionListener;
 
 public class CadastroProduto {
     private static final int WIDTH = 500;
-    private static final int HEIGHT = 280;
+    private static final int HEIGHT = 350;
 
     private JPanel background;
     private JTextField inputNome;
@@ -19,9 +19,36 @@ public class CadastroProduto {
     private JLabel labelNome;
     private JLabel labelCategoria;
     private JLabel labelQuantidade;
+    private JButton salvarButton;
+    private JPanel buttonBackground;
+    private JButton atualizarButton;
+    private JButton limparCamposButton;
+    private JButton excluirButton;
 
     public CadastroProduto() {
-        cadastrarButton.addActionListener(new ActionListener() {
+        limparCamposButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                inputNome.setText("");
+                inputCategoria.setText("");
+                valorUnitarioLabel.setText("");
+                inputValor.setText("");
+                inputQuantidade.setText("");
+            }
+        });
+        atualizarButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JOptionPane.showMessageDialog(null, "Atualizando Produto");
+            }
+        });
+        excluirButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JOptionPane.showMessageDialog(null, "Excluindo Produto");
+            }
+        });
+        salvarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 JOptionPane.showMessageDialog(null, "Cadastrando Produto");
@@ -34,6 +61,46 @@ public class CadastroProduto {
         this.background.setLayout(null); // Desativa o layout manager
         this.background.setBounds(0, 0, WIDTH, HEIGHT); // Define tamanho e posição
         this.background.setPreferredSize(new Dimension(WIDTH, HEIGHT)); // Garante o tamanho preferido
+    }
+
+    public JButton getSalvarButton() {
+        return salvarButton;
+    }
+
+    public void setSalvarButton(JButton salvarButton) {
+        this.salvarButton = salvarButton;
+    }
+
+    public JPanel getButtonBackground() {
+        return buttonBackground;
+    }
+
+    public void setButtonBackground(JPanel buttonBackground) {
+        this.buttonBackground = buttonBackground;
+    }
+
+    public JButton getAtualizarButton() {
+        return atualizarButton;
+    }
+
+    public void setAtualizarButton(JButton atualizarButton) {
+        this.atualizarButton = atualizarButton;
+    }
+
+    public JButton getLimparCamposButton() {
+        return limparCamposButton;
+    }
+
+    public void setLimparCamposButton(JButton limparCamposButton) {
+        this.limparCamposButton = limparCamposButton;
+    }
+
+    public JButton getExcluirButton() {
+        return excluirButton;
+    }
+
+    public void setExcluirButton(JButton excluirButton) {
+        this.excluirButton = excluirButton;
     }
 
     public JPanel getBackground() {
