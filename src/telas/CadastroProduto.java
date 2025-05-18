@@ -2,12 +2,10 @@ package telas;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class CadastroProduto {
     private static final int WIDTH = 500;
-    private static final int HEIGHT = 350;
+    private static final int HEIGHT = 400;
 
     private JPanel background;
     private JTextField inputNome;
@@ -15,171 +13,143 @@ public class CadastroProduto {
     private JLabel valorUnitarioLabel;
     private JTextField inputValor;
     private JTextField inputQuantidade;
-    private JButton cadastrarButton;
     private JLabel labelNome;
     private JLabel labelCategoria;
     private JLabel labelQuantidade;
     private JButton salvarButton;
-    private JPanel buttonBackground;
+    private JPanel buttonsBackground;
     private JButton atualizarButton;
     private JButton limparCamposButton;
     private JButton excluirButton;
 
     public CadastroProduto() {
-        limparCamposButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                inputNome.setText("");
-                inputCategoria.setText("");
-                valorUnitarioLabel.setText("");
-                inputValor.setText("");
-                inputQuantidade.setText("");
+        SwingUtilities.invokeLater(() -> {
+            Window window = SwingUtilities.getWindowAncestor(background);
+            if (window instanceof JFrame) {
+                JFrame frame = (JFrame) window;
+                frame.setResizable(false);
+                frame.setSize(WIDTH, HEIGHT);
+                frame.setMinimumSize(new Dimension(WIDTH, HEIGHT));
+                frame.setMaximumSize(new Dimension(WIDTH, HEIGHT));
             }
         });
-        atualizarButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(null, "Atualizando Produto");
+        limparCamposButton.addActionListener(_ -> {
+            inputNome.setText("");
+            inputCategoria.setText("");
+            valorUnitarioLabel.setText("");
+            inputValor.setText("");
+            inputQuantidade.setText("");
+        });
+        atualizarButton.addActionListener(_ -> {
+            if (!this.verificarCampos()) return;
+            JOptionPane.showMessageDialog(null, "Atualizando Produto");
+        });
+        excluirButton.addActionListener(_ -> {
+            JOptionPane.showMessageDialog(null, "Excluindo Produto");
+        });
+        salvarButton.addActionListener(_ -> {
+            if (!this.verificarCampos()) return;
+            JOptionPane.showMessageDialog(null, "Cadastrando Produto");
+        });
+    }
+
+    public void setWindowSize(int width, int height) {
+        SwingUtilities.invokeLater(() -> {
+            Window window = SwingUtilities.getWindowAncestor(background);
+            if (window instanceof JFrame) {
+                JFrame frame = (JFrame) window;
+                frame.setSize(width, height);
+                frame.setMinimumSize(new Dimension(width, height));
+                frame.setMaximumSize(new Dimension(width, height));
             }
         });
-        excluirButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(null, "Excluindo Produto");
-            }
-        });
-        salvarButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(null, "Cadastrando Produto");
-            }
-        });
+    }
+
+    private boolean verificarCampos() {
+        // Verificar se não estão vazios
+        if (this.getInputNome().getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Preencha o campo nome");
+            return false;
+        } else if (this.getInputCategoria().getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Preencha o campo categoria");
+            return false;
+        } else if (this.getInputValor().getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Preencha o campo valor");
+            return false;
+        } else if (this.getInputQuantidade().getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Preencha o campo quantidade");
+            return false;
+        }
+
+        String quantidadeEstoque = this.getInputQuantidade().getText().replaceAll("[^0-9]", "");
+        if (quantidadeEstoque.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Preencha corretamente o campo quantidade");
+            return false;
+        }
+
+        return true;
     }
 
     private void createUIComponents() {
         this.background = new JPanel();
-        this.background.setLayout(null); // Desativa o layout manager
-        this.background.setBounds(0, 0, WIDTH, HEIGHT); // Define tamanho e posição
-        this.background.setPreferredSize(new Dimension(WIDTH, HEIGHT)); // Garante o tamanho preferido
-    }
-
-    public JButton getSalvarButton() {
-        return salvarButton;
-    }
-
-    public void setSalvarButton(JButton salvarButton) {
-        this.salvarButton = salvarButton;
-    }
-
-    public JPanel getButtonBackground() {
-        return buttonBackground;
-    }
-
-    public void setButtonBackground(JPanel buttonBackground) {
-        this.buttonBackground = buttonBackground;
-    }
-
-    public JButton getAtualizarButton() {
-        return atualizarButton;
-    }
-
-    public void setAtualizarButton(JButton atualizarButton) {
-        this.atualizarButton = atualizarButton;
-    }
-
-    public JButton getLimparCamposButton() {
-        return limparCamposButton;
-    }
-
-    public void setLimparCamposButton(JButton limparCamposButton) {
-        this.limparCamposButton = limparCamposButton;
-    }
-
-    public JButton getExcluirButton() {
-        return excluirButton;
-    }
-
-    public void setExcluirButton(JButton excluirButton) {
-        this.excluirButton = excluirButton;
+        this.background.setLayout(null);
+        this.background.setBounds(0, 0, WIDTH, HEIGHT);
+        this.background.setPreferredSize(new Dimension(WIDTH, HEIGHT));
     }
 
     public JPanel getBackground() {
         return background;
     }
 
-    public void setBackground(JPanel background) {
-        this.background = background;
-    }
-
     public JTextField getInputNome() {
         return inputNome;
-    }
-
-    public void setInputNome(JTextField inputNome) {
-        this.inputNome = inputNome;
     }
 
     public JTextField getInputCategoria() {
         return inputCategoria;
     }
 
-    public JLabel getLabelNome() {
-        return labelNome;
-    }
-
-    public void setLabelNome(JLabel labelNome) {
-        this.labelNome = labelNome;
-    }
-
-    public JLabel getLabelCategoria() {
-        return labelCategoria;
-    }
-
-    public void setLabelCategoria(JLabel labelCategoria) {
-        this.labelCategoria = labelCategoria;
-    }
-
-    public JLabel getLabelQuantidade() {
-        return labelQuantidade;
-    }
-
-    public void setLabelQuantidade(JLabel labelQuantidade) {
-        this.labelQuantidade = labelQuantidade;
-    }
-
-    public void setInputCategoria(JTextField inputCategoria) {
-        this.inputCategoria = inputCategoria;
-    }
-
     public JLabel getValorUnitarioLabel() {
         return valorUnitarioLabel;
-    }
-
-    public void setValorUnitarioLabel(JLabel valorUnitarioLabel) {
-        this.valorUnitarioLabel = valorUnitarioLabel;
     }
 
     public JTextField getInputValor() {
         return inputValor;
     }
 
-    public void setInputValor(JTextField inputValor) {
-        this.inputValor = inputValor;
-    }
-
     public JTextField getInputQuantidade() {
         return inputQuantidade;
     }
 
-    public void setInputQuantidade(JTextField inputQuantidade) {
-        this.inputQuantidade = inputQuantidade;
+    public JLabel getLabelNome() {
+        return labelNome;
     }
 
-    public JButton getCadastrarButton() {
-        return cadastrarButton;
+    public JLabel getLabelCategoria() {
+        return labelCategoria;
     }
 
-    public void setCadastrarButton(JButton cadastrarButton) {
-        this.cadastrarButton = cadastrarButton;
+    public JLabel getLabelQuantidade() {
+        return labelQuantidade;
+    }
+
+    public JButton getSalvarButton() {
+        return salvarButton;
+    }
+
+    public JPanel getButtonsBackground() {
+        return buttonsBackground;
+    }
+
+    public JButton getAtualizarButton() {
+        return atualizarButton;
+    }
+
+    public JButton getLimparCamposButton() {
+        return limparCamposButton;
+    }
+
+    public JButton getExcluirButton() {
+        return excluirButton;
     }
 }
