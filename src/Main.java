@@ -1,5 +1,5 @@
 import connection.MySQLConnection;
-import telas.CadastroProduto;
+import view.CadastroProduto;
 
 import javax.swing.*;
 

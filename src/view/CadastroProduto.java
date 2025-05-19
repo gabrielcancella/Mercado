@@ -1,9 +1,13 @@
-package telas;
+package view;
+
+import models.DAO.ProdutosDAO;
+import models.entity.ProdutosEntity;
+import models.interfaces.Tela;
 
 import javax.swing.*;
 import java.awt.*;
 
-public class CadastroProduto {
+public class CadastroProduto implements Tela {
     private static final int WIDTH = 500;
     private static final int HEIGHT = 400;
 
@@ -49,6 +53,12 @@ public class CadastroProduto {
         });
         salvarButton.addActionListener(_ -> {
             if (!this.verificarCampos()) return;
+            ProdutosDAO.cadastro(new ProdutosEntity(
+                    getInputNome().getText(),
+                    1,
+                    Double.parseDouble(getInputValor().getText()),
+                    Long.parseLong(getInputQuantidade().getText())
+            ));
             JOptionPane.showMessageDialog(null, "Cadastrando Produto");
         });
     }

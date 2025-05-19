@@ -4,30 +4,30 @@ import java.sql.Connection;
 
 public class MySQLConnection {
     private static String url = "jdbc:mysql://localhost:3306/mercado_tres_irmoes";
-    public static String usuario = "root";
-    public static String senha = "root";
-    private Connection conn;
+    private static String usuario = "root";
+    private static String senha = "root";
+    public static Connection conn;
 
-    public Connection getConnection() {
-        if (this.conn == null) {
+    public static Connection getConnection() {
+        if (conn == null) {
             setConnection();
         }
-        return this.conn;
+        return conn;
     }
 
-    private void setConnection() {
+    private static void setConnection() {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            this.conn = java.sql.DriverManager.getConnection(url, usuario, senha);
+            conn = java.sql.DriverManager.getConnection(url, usuario, senha);
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    public void closeConnection() {
+    public static void closeConnection() {
         try {
-            if (this.conn != null) {
-                this.conn.close();
+            if (conn != null) {
+                conn.close();
             }
         } catch (Exception e) {
             e.printStackTrace();
