@@ -7,6 +7,14 @@ public class ProdutosEntity {
     private double preco;
     private long quantidade;
 
+
+    public ProdutosEntity(String nome, long categoria, double preco, long quantidade) {
+        this.nome = nome;
+        this.categoria = categoria;
+        this.preco = preco;
+        this.quantidade = quantidade;
+    }
+
     public long getId() {
         return id;
     }
