@@ -7,7 +7,7 @@ import models.interfaces.Tela;
 import javax.swing.*;
 import java.awt.*;
 
-// TA UMA BOSTA GABRIEL, MEU DEUS, SE FOR PRA FAZER ASSIM PEDE PRO GPT PELO MENOS
+// TA UMA BOSTA GABRIEL, MEU DEUS, SE FOR PRA FAZER ASSIM PEDE PRO GPT PELO MENOS - OK
 
 public class CadastroProduto implements Tela {
     private static final int WIDTH = 500;
