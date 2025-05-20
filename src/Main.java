@@ -1,18 +1,19 @@
 import connection.MySQLConnection;
+import controllers.ProdutoController;
 import view.CadastroProduto;
 
 import javax.swing.*;
+import java.sql.Connection;
 
 public class Main {
     public static void main(String[] args) {
-        // Test the MySQLConnection class
-        MySQLConnection connection = new MySQLConnection();
-        connection.getConnection();
-        System.out.println("Connection established: " + (connection.getConnection() != null));
+        Connection conn = MySQLConnection.getConnection();
+
+        ProdutoController controller = new ProdutoController(conn);
 
         SwingUtilities.invokeLater(() -> {
             JFrame frame = new JFrame("Mercado Três Irmãos");
-            CadastroProduto cadastroProduto = new CadastroProduto();
+            CadastroProduto cadastroProduto = new CadastroProduto(controller);
 
             frame.setContentPane(cadastroProduto.getBackground());
             frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

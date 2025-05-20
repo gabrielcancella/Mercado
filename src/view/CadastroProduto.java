@@ -1,17 +1,17 @@
 package view;
 
-import models.DAO.ProdutosDAO;
+import controllers.ProdutoController;
 import models.entity.ProdutosEntity;
 import models.interfaces.Tela;
 
 import javax.swing.*;
 import java.awt.*;
 
-// TA UMA BOSTA GABRIEL, MEU DEUS, SE FOR PRA FAZER ASSIM PEDE PRO GPT PELO MENOS - OK
-
 public class CadastroProduto implements Tela {
     private static final int WIDTH = 500;
     private static final int HEIGHT = 400;
+
+    private ProdutoController controller;
 
     private JPanel background;
     private JTextField inputNome;
@@ -28,7 +28,9 @@ public class CadastroProduto implements Tela {
     private JButton limparCamposButton;
     private JButton excluirButton;
 
-    public CadastroProduto() {
+    public CadastroProduto(ProdutoController controller) {
+        this.controller = controller;
+
         SwingUtilities.invokeLater(() -> {
             Window window = SwingUtilities.getWindowAncestor(background);
             if (window instanceof JFrame) {
@@ -39,29 +41,35 @@ public class CadastroProduto implements Tela {
                 frame.setMaximumSize(new Dimension(WIDTH, HEIGHT));
             }
         });
+
         limparCamposButton.addActionListener(_ -> {
             inputNome.setText("");
             inputCategoria.setText("");
-            valorUnitarioLabel.setText("");
             inputValor.setText("");
             inputQuantidade.setText("");
         });
+
         atualizarButton.addActionListener(_ -> {
             if (!this.verificarCampos()) return;
             JOptionPane.showMessageDialog(null, "Atualizando Produto");
         });
+
         excluirButton.addActionListener(_ -> {
             JOptionPane.showMessageDialog(null, "Excluindo Produto");
         });
+
         salvarButton.addActionListener(_ -> {
             if (!this.verificarCampos()) return;
-            ProdutosDAO.cadastro(new ProdutosEntity(
+
+            ProdutosEntity produto = new ProdutosEntity(
                     getInputNome().getText(),
                     1,
                     Double.parseDouble(getInputValor().getText()),
                     Long.parseLong(getInputQuantidade().getText())
-            ));
-            JOptionPane.showMessageDialog(null, "Cadastrando Produto");
+            );
+
+            controller.cadastrarProduto(produto);
+            JOptionPane.showMessageDialog(null, "Produto cadastrado com sucesso!");
         });
     }
 
@@ -78,7 +86,6 @@ public class CadastroProduto implements Tela {
     }
 
     private boolean verificarCampos() {
-        // Verificar se não estão vazios
         if (this.getInputNome().getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Preencha o campo nome");
             return false;

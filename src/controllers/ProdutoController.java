@@ -1,17 +1,17 @@
 package controllers;
-
 import models.DAO.ProdutosDAO;
 import models.entity.ProdutosEntity;
+
+import java.sql.Connection;
 
 public class ProdutoController {
     private ProdutosDAO dao;
 
-    public ProdutoController(ProdutosDAO dao){
-        this.dao = dao;
+    public ProdutoController(Connection conn) {
+        this.dao = new ProdutosDAO(conn);
     }
 
-    public void cadastrarProduto(String nome, long categoria, long preco, long quantidade){
-        ProdutosEntity produto = new ProdutosEntity(nome,categoria, preco, quantidade);
+    public void cadastrarProduto(ProdutosEntity produto) {
         dao.cadastro(produto);
     }
 
