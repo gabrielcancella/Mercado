@@ -24,23 +24,8 @@ Criar uma aplicação de controle de estoque local para mercados, permitindo:
 
 ---
 
-## 🗂️ Estrutura do Projeto
-
-```plaintext
-src/
-├── models/        
-    ├── entity/      # Classes do domínio (entidades)
-    └── dao/         # Acesso ao banco (Data Access Objects)
-├── controllers/   # Lógica de negócio
-├── view/          # Telas em Java Swing
-├── util/          # Utilitários (ex: conexão com o banco)
-└── Main.java      # Ponto de entrada
-```
----
-
 ## ✅ Funcionalidades previstas
 
-- Estrutura de pastas
 - Conexão com banco SQL Server
 - Modelos: Produto, Venda, ItemVenda, etc.
 - DAOs para acesso ao banco
