@@ -27,6 +27,7 @@ public class CadastroProduto implements Tela {
     private JButton atualizarButton;
     private JButton limparCamposButton;
     private JButton excluirButton;
+    private JComboBox categoriasCombobox;
 
     public CadastroProduto(ProdutoController controller) {
         this.controller = controller;
@@ -70,6 +71,11 @@ public class CadastroProduto implements Tela {
 
             controller.cadastrarProduto(produto);
             JOptionPane.showMessageDialog(null, "Produto cadastrado com sucesso!");
+
+            inputNome.setText("");
+            inputCategoria.setText("");
+            inputValor.setText("");
+            inputQuantidade.setText("");
         });
     }
 

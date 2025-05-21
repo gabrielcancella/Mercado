@@ -11,8 +11,14 @@ public class ProdutoController {
         this.dao = new ProdutosDAO(conn);
     }
 
-    public void cadastrarProduto(ProdutosEntity produto) {
-        dao.cadastro(produto);
+    public boolean cadastrarProduto(ProdutosEntity produto) {
+        try {
+            dao.cadastro(produto);
+            return true;
+        } catch (Exception e) {
+            System.out.println("Falha ao cadastrar produto. %s".formatted(e.getMessage()));
+            return false;
+        }
     }
 
 }
