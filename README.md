@@ -4,7 +4,7 @@ Este é um projeto em andamento de um **sistema de gerenciamento de estoque** . 
 
 ---
 
-## 🎯 Objetivo
+## Objetivo
 
 Criar uma aplicação de controle de estoque local para mercados, permitindo:
 
@@ -15,7 +15,7 @@ Criar uma aplicação de controle de estoque local para mercados, permitindo:
 
 ---
 
-## 📦 Tecnologias
+## Tecnologias
 
 - Java 23+
 - Java Swing (GUI)
@@ -24,7 +24,7 @@ Criar uma aplicação de controle de estoque local para mercados, permitindo:
 
 ---
 
-## ✅ Funcionalidades previstas
+## Funcionalidades previstas
 
 - Conexão com banco SQL Server
 - Modelos: Produto, Venda, ItemVenda, etc.
@@ -32,11 +32,5 @@ Criar uma aplicação de controle de estoque local para mercados, permitindo:
 - Controllers com regras de negócio
 - Telas Swing (cadastro, vendas, estoque)
 - Relatórios
-
-## 📄 Licença
-
-Licença a definir.
-
----
 
 
