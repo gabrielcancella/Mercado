@@ -63,7 +63,7 @@ public class CadastroProduto implements Tela {
         if (this.getInputNome().getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Preencha o campo nome");
             return false;
-        } else if ((this.getCategoriasCombobox().getSelectedIndex() == 0 || this.getCategoriasCombobox().getSelectedItem() == null) || true) {
+        } else if ((this.getCategoriasCombobox().getSelectedIndex() == 0 || this.getCategoriasCombobox().getSelectedItem() == null) && false) {
             JOptionPane.showMessageDialog(null, "Seleciona a categoria do produto");
             return false;
         } else if (this.getInputValor().getText().isEmpty()) {
