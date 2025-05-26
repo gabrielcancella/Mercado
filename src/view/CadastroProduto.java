@@ -49,13 +49,17 @@ public class CadastroProduto implements Tela {
 
             if (ProdutoController.cadastrarProduto(produto)) {
                 JOptionPane.showMessageDialog(null, "Produto cadastrado com sucesso!");
+                this.limparCampos();
+
+            }else {
+                JOptionPane.showMessageDialog(null, "Produto já existe ou erro ao cadastrar.");
+
             }
 
-            this.limparCampos();
         });
 
         this.getExcluirButton().addActionListener(_ -> {
-           ViewManager.backToMainScreen();
+            ViewManager.backToMainScreen();
         });
     }
 
