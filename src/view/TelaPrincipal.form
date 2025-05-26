@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="view.TelaPrincipal">
+  <grid id="27dc6" binding="background" layout-manager="GridLayoutManager" row-count="5" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="5" vgap="5">
+    <margin top="0" left="0" bottom="0" right="0"/>
+    <constraints>
+      <xy x="20" y="20" width="500" height="287"/>
+    </constraints>
+    <properties/>
+    <border type="none"/>
+    <children>
+      <component id="55f8c" class="javax.swing.JLabel">
+        <constraints>
+          <grid row="0" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <font name="JetBrains Mono" size="20" style="1"/>
+          <text value="Mercado Três Irmões"/>
+        </properties>
+      </component>
+      <component id="dbc1a" class="javax.swing.JLabel">
+        <constraints>
+          <grid row="1" column="0" row-span="2" col-span="2" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <font name="JetBrains Mono" size="16" style="0"/>
+          <text value="Controle de Estoque"/>
+        </properties>
+      </component>
+      <component id="a9c1e" class="javax.swing.JButton" binding="produtosButton">
+        <constraints>
+          <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="7" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="Listar Produtos"/>
+        </properties>
+      </component>
+      <component id="e4252" class="javax.swing.JButton" binding="vendasButton">
+        <constraints>
+          <grid row="4" column="1" row-span="1" col-span="1" vsize-policy="7" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="Listar Vendas"/>
+        </properties>
+      </component>
+      <component id="d7f5d" class="javax.swing.JButton" binding="cadastrarProdutoButton" default-binding="true">
+        <constraints>
+          <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="7" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="Cadastrar Produto"/>
+        </properties>
+      </component>
+      <component id="33e23" class="javax.swing.JButton" binding="cadastrarVendasButton" default-binding="true">
+        <constraints>
+          <grid row="3" column="1" row-span="1" col-span="1" vsize-policy="7" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="Cadastrar Vendas"/>
+        </properties>
+      </component>
+    </children>
+  </grid>
+</form>

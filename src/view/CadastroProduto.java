@@ -13,45 +13,31 @@ public class CadastroProduto implements Tela {
 
     private JPanel background;
     private JTextField inputNome;
-    private JLabel valorUnitarioLabel;
     private JTextField inputValor;
     private JTextField inputQuantidade;
-    private JLabel labelNome;
-    private JLabel labelCategoria;
-    private JLabel labelQuantidade;
     private JButton salvarButton;
-    private JPanel buttonsBackground;
     private JButton atualizarButton;
     private JButton limparCamposButton;
     private JButton excluirButton;
     private JComboBox categoriasCombobox;
 
     public CadastroProduto() {
-        SwingUtilities.invokeLater(() -> {
-            Window window = SwingUtilities.getWindowAncestor(background);
-            if (window instanceof JFrame) {
-                JFrame frame = (JFrame) window;
-                frame.setResizable(false);
-                frame.setSize(WIDTH, HEIGHT);
-                frame.setMinimumSize(new Dimension(WIDTH, HEIGHT));
-                frame.setMaximumSize(new Dimension(WIDTH, HEIGHT));
-            }
-        });
+        ViewManager.setWindowSize(WIDTH, HEIGHT);
 
-        limparCamposButton.addActionListener(_ -> {
+        this.getLimparCamposButton().addActionListener(_ -> {
             this.limparCampos();
         });
 
-        atualizarButton.addActionListener(_ -> {
+        this.getAtualizarButton().addActionListener(_ -> {
             if (!this.verificarCampos()) return;
             JOptionPane.showMessageDialog(null, "Atualizando Produto");
         });
 
-        excluirButton.addActionListener(_ -> {
+        this.getAtualizarButton().addActionListener(_ -> {
             JOptionPane.showMessageDialog(null, "Excluindo Produto");
         });
 
-        salvarButton.addActionListener(_ -> {
+        this.getSalvarButton().addActionListener(_ -> {
             if (!this.verificarCampos()) return;
 
             ProdutosEntity produto = new ProdutosEntity(
@@ -61,22 +47,15 @@ public class CadastroProduto implements Tela {
                     Long.parseLong(getInputQuantidade().getText())
             );
 
-            ProdutoController.cadastrarProduto(produto);
-            JOptionPane.showMessageDialog(null, "Produto cadastrado com sucesso!");
+            if (ProdutoController.cadastrarProduto(produto)) {
+                JOptionPane.showMessageDialog(null, "Produto cadastrado com sucesso!");
+            }
 
             this.limparCampos();
         });
-    }
 
-    public void setWindowSize(int width, int height) {
-        SwingUtilities.invokeLater(() -> {
-            Window window = SwingUtilities.getWindowAncestor(background);
-            if (window instanceof JFrame) {
-                JFrame frame = (JFrame) window;
-                frame.setSize(width, height);
-                frame.setMinimumSize(new Dimension(width, height));
-                frame.setMaximumSize(new Dimension(width, height));
-            }
+        this.getExcluirButton().addActionListener(_ -> {
+           ViewManager.backToMainScreen();
         });
     }
 
@@ -136,10 +115,6 @@ public class CadastroProduto implements Tela {
 
     public JButton getSalvarButton() {
         return salvarButton;
-    }
-
-    public JPanel getButtonsBackground() {
-        return buttonsBackground;
     }
 
     public JButton getAtualizarButton() {

@@ -7,4 +7,6 @@ public interface Tela {
     int HEIGHT = 400;
 
     JPanel background = new JPanel();
+
+    JPanel getBackground();
 }
