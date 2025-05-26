@@ -7,12 +7,16 @@ import java.sql.Connection;
 public class ProdutoController {
     public static boolean cadastrarProduto(ProdutosEntity produto) {
         try {
-            ProdutosDAO.cadastro(produto);
-            return true;
+            if (!ProdutosDAO.produtoExiste(produto)){
+                ProdutosDAO.cadastro(produto);
+                return true;
+            }
+            return false;
         } catch (Exception e) {
             System.out.println("Falha ao cadastrar produto. %s".formatted(e.getMessage()));
             return false;
         }
+
     }
 
 }

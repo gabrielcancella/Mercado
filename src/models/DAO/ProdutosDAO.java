@@ -2,6 +2,7 @@ package models.DAO;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import connection.MySQLConnection;
@@ -22,6 +23,21 @@ public class ProdutosDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    public static boolean produtoExiste(ProdutosEntity produto){
+        String sql = "SELECT COUNT(*) FROM produtos WHERE nome = ?";
+
+        try (PreparedStatement stmt = MySQLConnection.getConnection().prepareStatement(sql)) {
+            stmt.setString(1, produto.getNome());
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                return rs.getInt(1) > 0;
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return false;
     }
 }
 
