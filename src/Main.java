@@ -9,11 +9,9 @@ public class Main {
     public static void main(String[] args) {
         Connection conn = MySQLConnection.getConnection();
 
-        ProdutoController controller = new ProdutoController(conn);
-
         SwingUtilities.invokeLater(() -> {
             JFrame frame = new JFrame("Mercado Três Irmãos");
-            CadastroProduto cadastroProduto = new CadastroProduto(controller);
+            CadastroProduto cadastroProduto = new CadastroProduto();
 
             frame.setContentPane(cadastroProduto.getBackground());
             frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

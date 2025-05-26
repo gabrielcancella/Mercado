@@ -11,11 +11,8 @@ public class CadastroProduto implements Tela {
     private static final int WIDTH = 500;
     private static final int HEIGHT = 400;
 
-    private ProdutoController controller;
-
     private JPanel background;
     private JTextField inputNome;
-    private JTextField inputCategoria;
     private JLabel valorUnitarioLabel;
     private JTextField inputValor;
     private JTextField inputQuantidade;
@@ -29,9 +26,7 @@ public class CadastroProduto implements Tela {
     private JButton excluirButton;
     private JComboBox categoriasCombobox;
 
-    public CadastroProduto(ProdutoController controller) {
-        this.controller = controller;
-
+    public CadastroProduto() {
         SwingUtilities.invokeLater(() -> {
             Window window = SwingUtilities.getWindowAncestor(background);
             if (window instanceof JFrame) {
@@ -44,10 +39,7 @@ public class CadastroProduto implements Tela {
         });
 
         limparCamposButton.addActionListener(_ -> {
-            inputNome.setText("");
-            inputCategoria.setText("");
-            inputValor.setText("");
-            inputQuantidade.setText("");
+            this.limparCampos();
         });
 
         atualizarButton.addActionListener(_ -> {
@@ -69,13 +61,10 @@ public class CadastroProduto implements Tela {
                     Long.parseLong(getInputQuantidade().getText())
             );
 
-            controller.cadastrarProduto(produto);
+            ProdutoController.cadastrarProduto(produto);
             JOptionPane.showMessageDialog(null, "Produto cadastrado com sucesso!");
 
-            inputNome.setText("");
-            inputCategoria.setText("");
-            inputValor.setText("");
-            inputQuantidade.setText("");
+            this.limparCampos();
         });
     }
 
@@ -95,8 +84,8 @@ public class CadastroProduto implements Tela {
         if (this.getInputNome().getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Preencha o campo nome");
             return false;
-        } else if (this.getInputCategoria().getText().isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Preencha o campo categoria");
+        } else if ((this.getCategoriasCombobox().getSelectedIndex() == 0 || this.getCategoriasCombobox().getSelectedItem() == null) || true) {
+            JOptionPane.showMessageDialog(null, "Seleciona a categoria do produto");
             return false;
         } else if (this.getInputValor().getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Preencha o campo valor");
@@ -115,6 +104,13 @@ public class CadastroProduto implements Tela {
         return true;
     }
 
+    private void limparCampos() {
+        inputNome.setText("");
+        categoriasCombobox.setSelectedItem(null);
+        inputValor.setText("");
+        inputQuantidade.setText("");
+    }
+
     private void createUIComponents() {
         this.background = new JPanel();
         this.background.setLayout(null);
@@ -130,32 +126,12 @@ public class CadastroProduto implements Tela {
         return inputNome;
     }
 
-    public JTextField getInputCategoria() {
-        return inputCategoria;
-    }
-
-    public JLabel getValorUnitarioLabel() {
-        return valorUnitarioLabel;
-    }
-
     public JTextField getInputValor() {
         return inputValor;
     }
 
     public JTextField getInputQuantidade() {
         return inputQuantidade;
-    }
-
-    public JLabel getLabelNome() {
-        return labelNome;
-    }
-
-    public JLabel getLabelCategoria() {
-        return labelCategoria;
-    }
-
-    public JLabel getLabelQuantidade() {
-        return labelQuantidade;
     }
 
     public JButton getSalvarButton() {
@@ -176,5 +152,9 @@ public class CadastroProduto implements Tela {
 
     public JButton getExcluirButton() {
         return excluirButton;
+    }
+
+    public JComboBox getCategoriasCombobox() {
+        return categoriasCombobox;
     }
 }
