@@ -4,11 +4,14 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import connection.MySQLConnection;
 import models.entity.ProdutosEntity;
 
 public class ProdutosDAO {
+
     public static void cadastro(ProdutosEntity produto) {
         String sql = "INSERT INTO produtos (nome, categoria, preco, quantidade) VALUES (?, ?, ?, ?)";
 
@@ -38,6 +41,31 @@ public class ProdutosDAO {
             throw new RuntimeException(e);
         }
         return false;
+    }
+
+    public static List<ProdutosEntity> listaProtudos(){
+        String sql = "SELECT * FROM produtos";
+        List<ProdutosEntity> listaProduto = new ArrayList<>();
+
+        try (PreparedStatement stmt = MySQLConnection.getConnection().prepareStatement(sql)){
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()){
+                String nome = rs.getString("nome");
+                long categoria = rs.getLong("categoria");
+                double preco = rs.getDouble("preco");
+                long quantidade = rs.getLong("quantidade");
+
+                ProdutosEntity p = new ProdutosEntity(nome, quantidade, preco, categoria);
+                listaProduto.add(p);
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+
+        return listaProduto;
     }
 }
 
