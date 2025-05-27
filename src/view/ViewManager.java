@@ -47,9 +47,10 @@ public class ViewManager {
     public static void setWindowSize(int width, int height) {
         SwingUtilities.invokeLater(() -> {
             JFrame frame = getInstance().getFrame();
-            frame.setSize(width, height);
-            frame.setMinimumSize(new Dimension(width, height));
-            frame.setMaximumSize(new Dimension(width, height));
+            Dimension size = new Dimension(width, height);
+            frame.setMinimumSize(size);
+            frame.setMaximumSize(size);
+            frame.setSize(size);
         });
     }
 

@@ -94,13 +94,6 @@ public class CadastroProduto implements Tela {
         inputQuantidade.setText("");
     }
 
-    private void createUIComponents() {
-        this.background = new JPanel();
-        this.background.setLayout(null);
-        this.background.setBounds(0, 0, WIDTH, HEIGHT);
-        this.background.setPreferredSize(new Dimension(WIDTH, HEIGHT));
-    }
-
     public JPanel getBackground() {
         return background;
     }
