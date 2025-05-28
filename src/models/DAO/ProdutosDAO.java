@@ -65,6 +65,21 @@ public class ProdutosDAO {
         }
         return listaProduto;
     }
+
+
+    public static boolean deletarProduto(int id) {
+        String sql = "DELETE FROM produtos WHERE id = ?";
+
+        try (PreparedStatement stmt = MySQLConnection.getConnection().prepareStatement(sql)) {
+
+            stmt.setInt(1, id);
+            int deletados = stmt.executeUpdate();
+            return deletados > 0;
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }
 
 
