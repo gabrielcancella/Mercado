@@ -63,8 +63,6 @@ public class ProdutosDAO {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-
-
         return listaProduto;
     }
 }
