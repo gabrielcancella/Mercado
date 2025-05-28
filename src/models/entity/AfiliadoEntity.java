@@ -1,20 +1,21 @@
 package models.entity;
 
 
+import java.sql.Date;
+
 public class AfiliadoEntity {
     private long id;
     private String nome;
     private String sobrenome;
+    private String cpf;
+    private Date nascimento;
 
-    public AfiliadoEntity(String nome, String sobrenome, String cpf, String nascimento) {
+    public AfiliadoEntity(String nome, String sobrenome, String cpf, Date nascimento) {
         this.nome = nome;
         this.sobrenome = sobrenome;
         this.cpf = cpf;
         this.nascimento = nascimento;
     }
-
-    private String cpf;
-    private String nascimento;
 
     public long getId() {
         return id;
@@ -48,11 +49,11 @@ public class AfiliadoEntity {
         this.cpf = cpf;
     }
 
-    public String getNascimento() {
+    public Date getNascimento() {
         return nascimento;
     }
 
-    public void setNascimento(String nascimento) {
+    public void setNascimento(Date nascimento) {
         this.nascimento = nascimento;
     }
 }

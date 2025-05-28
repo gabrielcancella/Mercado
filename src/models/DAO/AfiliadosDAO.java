@@ -15,7 +15,7 @@ public class AfiliadosDAO {
             stmt.setString(1, afiliado.getNome());
             stmt.setString(2, afiliado.getSobrenome());
             stmt.setString(3, afiliado.getCpf());
-            stmt.setString(4, afiliado.getNascimento());
+            stmt.setDate(4, afiliado.getNascimento());
 
             stmt.executeUpdate();
 

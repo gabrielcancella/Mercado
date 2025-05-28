@@ -50,12 +50,12 @@
           <text value="Cadastrar Vendas"/>
         </properties>
       </component>
-      <component id="f8168" class="javax.swing.JButton" binding="cadastrarUsuarioButton">
+      <component id="f8168" class="javax.swing.JButton" binding="cadastrarAfiliadoButton">
         <constraints>
           <grid row="5" column="0" row-span="1" col-span="1" vsize-policy="7" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <text value="Cadastrar Usuario"/>
+          <text value="Cadastrar Afiliado"/>
         </properties>
       </component>
       <component id="e4252" class="javax.swing.JButton" binding="vendasButton">
@@ -66,12 +66,12 @@
           <text value="Listar Vendas"/>
         </properties>
       </component>
-      <component id="55b34" class="javax.swing.JButton" binding="listarUsuariosButton">
+      <component id="55b34" class="javax.swing.JButton" binding="listarAfiliadosButton">
         <constraints>
           <grid row="5" column="1" row-span="1" col-span="1" vsize-policy="7" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <text value="Listar Usuários"/>
+          <text value="Listar Afiliados"/>
         </properties>
       </component>
     </children>
