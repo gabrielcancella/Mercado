@@ -1,6 +1,6 @@
 package models.entity;
 
-public class FornecedoresEntity {
+public class FornecedorEntity {
     private long id;
     private String nome;
     private String telefone;

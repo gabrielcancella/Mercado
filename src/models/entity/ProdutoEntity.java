@@ -1,6 +1,6 @@
 package models.entity;
 
-public class ProdutosEntity {
+public class ProdutoEntity {
     private long id;
     private String nome;
     private long categoria;
@@ -8,7 +8,7 @@ public class ProdutosEntity {
     private long quantidade;
 
 
-    public ProdutosEntity(String nome, long categoria, double preco, long quantidade) {
+    public ProdutoEntity(String nome, long categoria, double preco, long quantidade) {
         this.nome = nome;
         this.categoria = categoria;
         this.preco = preco;

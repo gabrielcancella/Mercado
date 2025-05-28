@@ -1,18 +1,16 @@
 package models.DAO;
 
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-
 import connection.MySQLConnection;
-import models.entity.ProdutosEntity;
+import models.entity.ProdutoEntity;
 
 public class ProdutosDAO {
 
-    public static void cadastro(ProdutosEntity produto) {
+    public static void cadastro(ProdutoEntity produto) {
         String sql = "INSERT INTO produtos (nome, categoria, preco, quantidade) VALUES (?, ?, ?, ?)";
 
         try (PreparedStatement stmt = MySQLConnection.getConnection().prepareStatement(sql)) {
@@ -28,7 +26,7 @@ public class ProdutosDAO {
         }
     }
 
-    public static boolean produtoExiste(ProdutosEntity produto){
+    public static boolean produtoExiste(ProdutoEntity produto){
         String sql = "SELECT COUNT(*) FROM produtos WHERE nome = ?";
 
         try (PreparedStatement stmt = MySQLConnection.getConnection().prepareStatement(sql)) {
@@ -43,9 +41,9 @@ public class ProdutosDAO {
         return false;
     }
 
-    public static List<ProdutosEntity> listaProtudos(){
+    public static List<ProdutoEntity> listaProtudos(){
         String sql = "SELECT * FROM produtos";
-        List<ProdutosEntity> listaProduto = new ArrayList<>();
+        List<ProdutoEntity> listaProduto = new ArrayList<>();
 
         try (PreparedStatement stmt = MySQLConnection.getConnection().prepareStatement(sql)){
             ResultSet rs = stmt.executeQuery();
@@ -56,7 +54,7 @@ public class ProdutosDAO {
                 double preco = rs.getDouble("preco");
                 long quantidade = rs.getLong("quantidade");
 
-                ProdutosEntity p = new ProdutosEntity(nome, quantidade, preco, categoria);
+                ProdutoEntity p = new ProdutoEntity(nome, quantidade, preco, categoria);
                 listaProduto.add(p);
             }
 

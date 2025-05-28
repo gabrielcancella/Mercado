@@ -1,11 +1,9 @@
 package controllers;
 import models.DAO.ProdutosDAO;
-import models.entity.ProdutosEntity;
-
-import java.sql.Connection;
+import models.entity.ProdutoEntity;
 
 public class ProdutoController {
-    public static boolean cadastrarProduto(ProdutosEntity produto) {
+    public static boolean cadastrarProduto(ProdutoEntity produto) {
         try {
             if (!ProdutosDAO.produtoExiste(produto)){
                 ProdutosDAO.cadastro(produto);

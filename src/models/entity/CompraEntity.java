@@ -2,7 +2,7 @@ package models.entity;
 
 import java.time.LocalDateTime;
 
-public class ComprasEntity {
+public class CompraEntity {
     private long id;
     private long fornecedor;
     private LocalDateTime data;

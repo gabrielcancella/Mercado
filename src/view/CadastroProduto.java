@@ -1,11 +1,10 @@
 package view;
 
 import controllers.ProdutoController;
-import models.entity.ProdutosEntity;
+import models.entity.ProdutoEntity;
 import models.interfaces.Tela;
 
 import javax.swing.*;
-import java.awt.*;
 
 public class CadastroProduto implements Tela {
     private static final int WIDTH = 500;
@@ -40,7 +39,7 @@ public class CadastroProduto implements Tela {
         this.getSalvarButton().addActionListener(_ -> {
             if (!this.verificarCampos()) return;
 
-            ProdutosEntity produto = new ProdutosEntity(
+            ProdutoEntity produto = new ProdutoEntity(
                     getInputNome().getText(),
                     1,
                     Double.parseDouble(getInputValor().getText()),

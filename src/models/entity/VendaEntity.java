@@ -2,7 +2,7 @@ package models.entity;
 
 import java.time.LocalDateTime;
 
-public class VendasEntity {
+public class VendaEntity {
     private long id;
     private LocalDateTime data;
     private double valor;
