@@ -8,7 +8,7 @@ import java.sql.SQLException;
 
 public class AfiliadosDAO {
 
-    public void cadastroAfiliado(AfiliadoEntity afiliado){
+    public static void cadastroAfiliado(AfiliadoEntity afiliado){
         String sql = "INSERT INTO afiliados (nome, sobrenome, cpf, nascimento) VALUES (?, ?, ?, ?)";
 
         try(PreparedStatement stmt = MySQLConnection.getConnection().prepareStatement(sql)){
