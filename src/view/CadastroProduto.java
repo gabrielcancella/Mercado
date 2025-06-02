@@ -1,10 +1,13 @@
 package view;
 
+import controllers.CategoriaController;
 import controllers.ProdutoController;
+import models.entity.CategoriaEntity;
 import models.entity.ProdutoEntity;
 import models.interfaces.Tela;
 
 import javax.swing.*;
+import java.util.List;
 
 public class CadastroProduto implements Tela {
     private static final int WIDTH = 500;
@@ -18,7 +21,7 @@ public class CadastroProduto implements Tela {
     private JButton atualizarButton;
     private JButton limparCamposButton;
     private JButton excluirButton;
-    private JComboBox categoriasCombobox;
+    private JComboBox<CategoriaEntity> categoriasCombobox;
 
     public CadastroProduto() {
         ViewManager.setWindowSize(WIDTH, HEIGHT);
@@ -41,7 +44,7 @@ public class CadastroProduto implements Tela {
 
             ProdutoEntity produto = new ProdutoEntity(
                     getInputNome().getText(),
-                    1,
+                    ((CategoriaEntity)getCategoriasCombobox().getSelectedItem()).getId(),
                     Double.parseDouble(getInputValor().getText()),
                     Long.parseLong(getInputQuantidade().getText())
             );
@@ -62,11 +65,23 @@ public class CadastroProduto implements Tela {
         });
     }
 
+    private void createUIComponents() {
+        // TODO: place custom component creation code here
+        this.categoriasCombobox = new JComboBox<>();
+        SwingUtilities.invokeLater(() -> {
+            List<CategoriaEntity> categorias = CategoriaController.getAllCategorias();
+            for (CategoriaEntity categoria : categorias) {
+                this.categoriasCombobox.addItem(categoria);
+            }
+            this.categoriasCombobox.setSelectedItem(null);
+        });
+    }
+
     private boolean verificarCampos() {
         if (this.getInputNome().getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Preencha o campo nome");
             return false;
-        } else if ((this.getCategoriasCombobox().getSelectedIndex() == 0 || this.getCategoriasCombobox().getSelectedItem() == null) && false) {
+        } else if (this.getCategoriasCombobox().getSelectedItem() == null) {
             JOptionPane.showMessageDialog(null, "Seleciona a categoria do produto");
             return false;
         } else if (this.getInputValor().getText().isEmpty()) {
@@ -125,7 +140,7 @@ public class CadastroProduto implements Tela {
         return excluirButton;
     }
 
-    public JComboBox getCategoriasCombobox() {
+    public JComboBox<CategoriaEntity> getCategoriasCombobox() {
         return categoriasCombobox;
     }
 }

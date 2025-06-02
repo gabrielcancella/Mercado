@@ -2,6 +2,8 @@ package controllers;
 import models.DAO.ProdutosDAO;
 import models.entity.ProdutoEntity;
 
+import java.util.List;
+
 public class ProdutoController {
     public static boolean cadastrarProduto(ProdutoEntity produto) {
         try {
@@ -16,5 +18,4 @@ public class ProdutoController {
         }
 
     }
-
 }

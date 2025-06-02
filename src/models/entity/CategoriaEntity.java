@@ -4,6 +4,11 @@ public class CategoriaEntity {
     private long id;
     private String nome;
 
+    public CategoriaEntity(long id, String nome) {
+        this.id = id;
+        this.nome = nome;
+    }
+
     public long getId() {
         return id;
     }
@@ -18,5 +23,10 @@ public class CategoriaEntity {
 
     public void setNome(String nome) {
         this.nome = nome;
+    }
+
+    @Override
+    public String toString() {
+        return this.nome;
     }
 }
