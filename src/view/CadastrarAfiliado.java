@@ -1,5 +1,6 @@
 package view;
 
+import controllers.AfiliadoController;
 import models.DAO.AfiliadosDAO;
 import models.entity.AfiliadoEntity;
 import models.interfaces.Tela;
@@ -47,17 +48,16 @@ public class CadastrarAfiliado implements Tela {
             }
 
             String[] partesData = nascimento.split("/");
-            Date data = new Date((Integer.parseInt(partesData[2])- 1900), (Integer.parseInt(partesData[1]) - 1), Integer.parseInt(partesData[0]));
+            Date data = new Date((Integer.parseInt(partesData[2]) - 1900), (Integer.parseInt(partesData[1]) - 1), Integer.parseInt(partesData[0]));
+            AfiliadoEntity afiliado = new AfiliadoEntity(nome, sobrenome, cpfLimpo, data);
             try {
-                AfiliadosDAO.cadastroAfiliado(new AfiliadoEntity(
-                        nome,
-                        sobrenome,
-                        cpfLimpo,
-                        data
-                ));
+                if (AfiliadoController.cadastrarAfiliado(afiliado)) {
+                    JOptionPane.showMessageDialog(null, "Afiliado cadastrado com sucesso!");
+                    this.limparCampos();
 
-                JOptionPane.showMessageDialog(null, "Afiliado cadastrado com sucesso!");
-                this.limparCampos();
+                } else {
+                    JOptionPane.showMessageDialog(null, "Afiliado ja existente!");
+                }
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(null, "Erro ao cadastrar afiliado: " + e.getMessage());
             }

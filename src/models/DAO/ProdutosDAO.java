@@ -41,9 +41,9 @@ public class ProdutosDAO {
         return false;
     }
 
-    public static List<ProdutoEntity> listaProtudos(){
+    public static List<ProdutoEntity> getAll(){
         String sql = "SELECT * FROM produtos";
-        List<ProdutoEntity> listaProduto = new ArrayList<>();
+        List<ProdutoEntity> produtos = new ArrayList<>();
 
         try (PreparedStatement stmt = MySQLConnection.getConnection().prepareStatement(sql)){
             ResultSet rs = stmt.executeQuery();
@@ -55,13 +55,13 @@ public class ProdutosDAO {
                 long quantidade = rs.getLong("quantidade");
 
                 ProdutoEntity p = new ProdutoEntity(nome, quantidade, preco, categoria);
-                listaProduto.add(p);
+                produtos.add(p);
             }
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        return listaProduto;
+        return produtos;
     }
 
 
