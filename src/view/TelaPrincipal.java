@@ -5,7 +5,7 @@ import models.interfaces.Tela;
 import javax.swing.*;
 
 public class TelaPrincipal implements Tela {
-    private final int WIDTH = 300;
+    private final int WIDTH = 400;
     private final int HEIGHT = 230;
 
     private JPanel background;

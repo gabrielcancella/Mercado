@@ -48,9 +48,9 @@ public class ViewManager {
         SwingUtilities.invokeLater(() -> {
             JFrame frame = getInstance().getFrame();
             Dimension size = new Dimension(width, height);
-            frame.setMinimumSize(size);
-            frame.setMaximumSize(size);
+            frame.setResizable(false);
             frame.setSize(size);
+            frame.setLocationRelativeTo(null);
         });
     }
 

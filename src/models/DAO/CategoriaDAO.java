@@ -32,11 +32,32 @@ public class CategoriaDAO {
         }
     }
 
-    public static void cadastrarCategoria(String nome) {
+    public static void cadastrar(String nome) {
         String sql = "INSERT INTO categorias (nome) VALUES (?)";
 
         try (PreparedStatement stmt = MySQLConnection.getConnection().prepareStatement(sql)) {
             stmt.setString(1, nome);
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void atualizar(long id, String novoNome) {
+        String sql = "UPDATE categorias SET nome = ? WHERE id = ?";
+        try (PreparedStatement stmt = MySQLConnection.getConnection().prepareStatement(sql)) {
+            stmt.setString(1, novoNome);
+            stmt.setLong(2, id);
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void excluir(long id) {
+        String sql = "DELETE FROM categorias WHERE id = ?";
+        try (PreparedStatement stmt = MySQLConnection.getConnection().prepareStatement(sql)) {
+            stmt.setLong(1, id);
             stmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();

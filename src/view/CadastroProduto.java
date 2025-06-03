@@ -24,7 +24,7 @@ public class CadastroProduto implements Tela {
     private JComboBox<CategoriaEntity> categoriasCombobox;
 
     public CadastroProduto() {
-        ViewManager.setWindowSize(WIDTH, HEIGHT);
+        ViewManager.setWindowSize(this.WIDTH, this.HEIGHT);
 
         this.getLimparCamposButton().addActionListener(_ -> {
             this.limparCampos();
@@ -66,7 +66,6 @@ public class CadastroProduto implements Tela {
     }
 
     private void createUIComponents() {
-        // TODO: place custom component creation code here
         this.categoriasCombobox = new JComboBox<>();
         SwingUtilities.invokeLater(() -> {
             List<CategoriaEntity> categorias = CategoriaController.getAllCategorias();
