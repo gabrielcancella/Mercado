@@ -11,7 +11,7 @@ public class CategoriaController {
     }
 
     public static void adicionarCategoria(String nome) {
-        if (nome != null  && !nome.isEmpty()) {
+        if (nome != null && !nome.isEmpty()) {
             CategoriaDAO.cadastrar(nome);
         } else {
             throw new IllegalArgumentException("Categoria inválida");
@@ -26,11 +26,17 @@ public class CategoriaController {
         }
     }
 
-    public static void excluirCategoria(long id) {
-        if (id > 0) {
-            CategoriaDAO.excluir(id);
-        } else {
+    public static boolean excluirCategoria(long id) {
+        if (id <= 0) {
             throw new IllegalArgumentException("ID inválido");
         }
+
+        if (!CategoriaDAO.existeForekey(id)) {
+            CategoriaDAO.excluir(id);
+            return true;
+        } else {
+            return false;
+        }
     }
+
 }

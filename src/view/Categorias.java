@@ -26,7 +26,6 @@ public class Categorias implements Tela {
             if (!nomeCategoria.isEmpty()) {
                 CategoriaController.adicionarCategoria(nomeCategoria);
                 nomeCategoriaInput.setText("");
-
                 ((CategoriaTableModel)categoriasTable.getModel()).atualizarDados();
             } else {
                 JOptionPane.showMessageDialog(background, "O nome da categoria não pode estar vazio.", "Erro", JOptionPane.ERROR_MESSAGE);
@@ -52,7 +51,11 @@ public class Categorias implements Tela {
             int selectedRow = categoriasTable.getSelectedRow();
             if (selectedRow != -1) {
                 long categoriaId = (long) categoriasTable.getValueAt(selectedRow, 0);
-                CategoriaController.excluirCategoria(categoriaId);
+                if (CategoriaController.excluirCategoria(categoriaId)){
+                    JOptionPane.showMessageDialog(null, "Categoria excluida com sucesso!");
+                } else {
+                    JOptionPane.showMessageDialog(null, "Erro ao excluir categoria");
+                }
                 ((CategoriaTableModel)categoriasTable.getModel()).atualizarDados();
             } else {
                 JOptionPane.showMessageDialog(background, "Selecione uma categoria para excluir.", "Erro", JOptionPane.ERROR_MESSAGE);

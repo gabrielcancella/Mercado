@@ -63,4 +63,20 @@ public class CategoriaDAO {
             e.printStackTrace();
         }
     }
+
+    public static boolean existeForekey(long id) {
+        String sql = "SELECT 1 FROM produtos WHERE categoria = ? LIMIT 1";
+
+        try (PreparedStatement stmt = MySQLConnection.getConnection().prepareStatement(sql)) {
+
+            stmt.setLong(1, id);
+            ResultSet rs = stmt.executeQuery();
+            return rs.next();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
 }
