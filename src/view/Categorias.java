@@ -54,7 +54,7 @@ public class Categorias implements Tela {
                 if (CategoriaController.excluirCategoria(categoriaId)){
                     JOptionPane.showMessageDialog(null, "Categoria excluida com sucesso!");
                 } else {
-                    JOptionPane.showMessageDialog(null, "Erro ao excluir categoria");
+                    JOptionPane.showMessageDialog(background, "Erro ao excluir categoria.", "Erro", JOptionPane.ERROR_MESSAGE);
                 }
                 ((CategoriaTableModel)categoriasTable.getModel()).atualizarDados();
             } else {

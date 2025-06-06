@@ -65,7 +65,7 @@ public class ProdutosDAO {
     }
 
 
-    public static boolean deletarProduto(int id) {
+    public static boolean excluir(int id) {
         String sql = "DELETE FROM produtos WHERE id = ?";
 
         try (PreparedStatement stmt = MySQLConnection.getConnection().prepareStatement(sql)) {
