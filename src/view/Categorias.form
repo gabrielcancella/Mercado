@@ -58,7 +58,9 @@
         <children>
           <component id="503f7" class="javax.swing.JTable" binding="categoriasTable" custom-create="true">
             <constraints/>
-            <properties/>
+            <properties>
+              <font name="JetBrains Mono" size="12" style="0"/>
+            </properties>
           </component>
         </children>
       </scrollpane>

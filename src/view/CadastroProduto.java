@@ -7,36 +7,28 @@ import models.entity.ProdutoEntity;
 import models.interfaces.Tela;
 
 import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.List;
 
 public class CadastroProduto implements Tela {
-    private static final int WIDTH = 500;
-    private static final int HEIGHT = 400;
+    private static final int WIDTH = 450;
+    private static final int HEIGHT = 330;
 
     private JPanel background;
     private JTextField inputNome;
     private JTextField inputValor;
     private JTextField inputQuantidade;
     private JButton salvarButton;
-    private JButton atualizarButton;
     private JButton limparCamposButton;
-    private JButton excluirButton;
     private JComboBox<CategoriaEntity> categoriasCombobox;
+    private JButton voltarButton;
 
     public CadastroProduto() {
         ViewManager.setWindowSize(this.WIDTH, this.HEIGHT);
 
         this.getLimparCamposButton().addActionListener(_ -> {
             this.limparCampos();
-        });
-
-        this.getAtualizarButton().addActionListener(_ -> {
-            if (!this.verificarCampos()) return;
-            JOptionPane.showMessageDialog(null, "Atualizando Produto");
-        });
-
-        this.getAtualizarButton().addActionListener(_ -> {
-            JOptionPane.showMessageDialog(null, "Excluindo Produto");
         });
 
         this.getSalvarButton().addActionListener(_ -> {
@@ -57,10 +49,8 @@ public class CadastroProduto implements Tela {
                 JOptionPane.showMessageDialog(null, "Produto já existe ou erro ao cadastrar.");
 
             }
-
         });
-
-        this.getExcluirButton().addActionListener(_ -> {
+        voltarButton.addActionListener(_ -> {
             ViewManager.backToMainScreen();
         });
     }
@@ -127,16 +117,8 @@ public class CadastroProduto implements Tela {
         return salvarButton;
     }
 
-    public JButton getAtualizarButton() {
-        return atualizarButton;
-    }
-
     public JButton getLimparCamposButton() {
         return limparCamposButton;
-    }
-
-    public JButton getExcluirButton() {
-        return excluirButton;
     }
 
     public JComboBox<CategoriaEntity> getCategoriasCombobox() {

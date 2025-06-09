@@ -3,11 +3,16 @@ package controllers;
 import models.DAO.CategoriaDAO;
 import models.DAO.ProdutosDAO;
 import models.entity.CategoriaEntity;
+import models.entity.ProdutoComCategoriaEntity;
 import models.entity.ProdutoEntity;
 
 import java.util.List;
 
 public class ProdutoController {
+    public static List<ProdutoComCategoriaEntity> getAllProdutosComCategoria() {
+        return ProdutosDAO.getAllComCategoria();
+    }
+
     public static boolean cadastrarProduto(ProdutoEntity produto) {
         try {
             if (!ProdutosDAO.produtoExiste(produto)) {

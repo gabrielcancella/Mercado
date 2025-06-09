@@ -1,13 +1,14 @@
 package models.entity;
 
-public class ProdutoEntity {
+public class ProdutoComCategoriaEntity {
     private long id;
     private String nome;
-    private long categoria;
+    private String categoria;
     private double preco;
     private long quantidade;
 
-    public ProdutoEntity(String nome, long categoria, double preco, long quantidade) {
+    public ProdutoComCategoriaEntity(long id, String nome, String categoria, double preco, long quantidade) {
+        this.id = id;
         this.nome = nome;
         this.categoria = categoria;
         this.preco = preco;
@@ -30,11 +31,11 @@ public class ProdutoEntity {
         this.nome = nome;
     }
 
-    public long getCategoria() {
+    public String getCategoria() {
         return categoria;
     }
 
-    public void setCategoria(long categoria) {
+    public void setCategoria(String categoria) {
         this.categoria = categoria;
     }
 
