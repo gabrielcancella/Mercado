@@ -2,7 +2,7 @@ package models.entity;
 
 public class ItensVendaEntity {
     private long venda;
-    private long produto;
+    private ProdutoEntity produto; 
     private long quantidade;
     private double valor_unitario;
 
@@ -14,11 +14,11 @@ public class ItensVendaEntity {
         this.venda = venda;
     }
 
-    public long getProduto() {
+    public ProdutoEntity getProduto() {
         return produto;
     }
 
-    public void setProduto(long produto) {
+    public void setProduto(ProdutoEntity produto) {
         this.produto = produto;
     }
 
