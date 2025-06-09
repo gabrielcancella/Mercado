@@ -3,6 +3,8 @@ package view;
 import models.interfaces.Tela;
 
 import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class TelaPrincipal implements Tela {
     private final int WIDTH = 400;
@@ -32,6 +34,9 @@ public class TelaPrincipal implements Tela {
         });
         listarProdutosButton.addActionListener(_ -> {
             ViewManager.setScreen(new ListaProdutos());
+        });
+        cadastrarVendasButton.addActionListener(_ -> {
+            ViewManager.setScreen(new CadastroVenda());
         });
     }
 

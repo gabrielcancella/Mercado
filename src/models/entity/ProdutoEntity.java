@@ -53,4 +53,8 @@ public class ProdutoEntity {
     public void setQuantidade(long quantidade) {
         this.quantidade = quantidade;
     }
+
+    public String toString() {
+        return this.getNome();
+    }
 }
