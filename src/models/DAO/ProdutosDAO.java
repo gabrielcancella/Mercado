@@ -17,13 +17,15 @@ public class ProdutosDAO {
         try (PreparedStatement stmt = MySQLConnection.getConnection().prepareStatement(sql)){
             ResultSet rs = stmt.executeQuery();
 
-            while (rs.next()){
+            while (rs.next()) {
+                long id = rs.getLong("id");
                 String nome = rs.getString("nome");
                 long categoria = rs.getLong("categoria");
                 double preco = rs.getDouble("preco");
                 long quantidade = rs.getLong("quantidade");
 
-                ProdutoEntity p = new ProdutoEntity(nome, quantidade, preco, categoria);
+                ProdutoEntity p = new ProdutoEntity(nome, categoria, preco, quantidade);
+                p.setId(id);
                 produtos.add(p);
             }
 

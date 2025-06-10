@@ -1,10 +1,13 @@
 package view;
 
 import controllers.ProdutoController;
-import models.entity.ItensCompraEstoqueEntity;
+import controllers.VendaController;
 import models.entity.ItensVendaEntity;
 import models.entity.ProdutoEntity;
+import models.entity.VendaEntity;
 import models.interfaces.Tela;
+import models.button.ButtonEditor;
+import models.button.ButtonRenderer;
 import models.table.ProdutoVendaTableModel;
 
 import javax.swing.*;
@@ -21,6 +24,7 @@ public class CadastroVenda implements Tela {
     private JButton adicionarProdutoButton;
     private JScrollPane ListaVenda;
     private JLabel valorTotalLabel; // Apenas JLabel agora
+    private JButton realizarVenda;
 
     private ProdutoVendaTableModel tableModel;
 
@@ -31,6 +35,11 @@ public class CadastroVenda implements Tela {
 
         tableModel = new ProdutoVendaTableModel();
         produtos.setModel(tableModel);
+
+        produtos.getColumn("Ação").setCellRenderer(new ButtonRenderer());
+        produtos.getColumn("Ação").setCellEditor(new ButtonEditor(new JCheckBox(), tableModel, this));
+
+
 
         popularCombos();
         configurarBotoes();
@@ -81,9 +90,45 @@ public class CadastroVenda implements Tela {
             tableModel.adicionarProduto(produtoSelecionado, quantidade);
             atualizarValorTotal();
         });
+        realizarVenda.addActionListener(e -> {
+            double valorTotal = 0.0;
+            List<ItensVendaEntity> itens = tableModel.getItens();
+
+            if (itens.isEmpty()) {
+                JOptionPane.showMessageDialog(null, "Adicione ao menos um produto.");
+                return;
+            }
+
+            for (ItensVendaEntity item : itens) {
+                valorTotal += item.getProduto().getPreco() * item.getQuantidade();
+            }
+
+            VendaEntity venda = new VendaEntity();
+            venda.setData(java.time.LocalDateTime.now());
+            venda.setValor(valorTotal);
+
+            long vendaId = VendaController.concluirVenda(venda);
+
+            if (vendaId > 0) {
+                for (ItensVendaEntity item : itens) {
+                    item.setVenda(vendaId);
+                    item.setValor_unitario(item.getProduto().getPreco());
+                    VendaController.salvarItem(item);
+                }
+
+                JOptionPane.showMessageDialog(null, "Venda realizada com sucesso!");
+
+                tableModel.limpar();
+                atualizarValorTotal();
+
+            } else {
+                JOptionPane.showMessageDialog(null, "Erro ao salvar a venda.");
+            }
+        });
+
     }
 
-    private void atualizarValorTotal() {
+    public void atualizarValorTotal() {
         double total = 0.0;
         for (ItensVendaEntity item : tableModel.getItens()) {
             ProdutoEntity produto = item.getProduto();
@@ -93,6 +138,7 @@ public class CadastroVenda implements Tela {
         }
         valorTotalLabel.setText(String.format("R$ %.2f", total));
     }
+
 
     @Override
     public JPanel getBackground() {

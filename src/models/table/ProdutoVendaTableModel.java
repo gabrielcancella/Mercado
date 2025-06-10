@@ -10,7 +10,7 @@ import java.util.List;
 public class ProdutoVendaTableModel extends AbstractTableModel {
 
     private final List<ItensVendaEntity> itens = new ArrayList<>();
-    private final String[] colunas = {"Produto", "Quantidade", "Valor Unitário", "Subtotal"};
+    private final String[] colunas = {"Produto", "Quantidade", "Valor Unitário", "Total", "Ação"};
 
     @Override
     public int getRowCount() {
@@ -30,15 +30,24 @@ public class ProdutoVendaTableModel extends AbstractTableModel {
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
         ItensVendaEntity item = itens.get(rowIndex);
-        ProdutoEntity produto = item.getProduto();
+        switch (columnIndex) {
+            case 0:
+                return item.getProduto().getNome();
+            case 1:
+                return item.getQuantidade();
+            case 2:
+                return String.format("R$ %.2f", item.getProduto().getPreco());
+            case 3:
+                return String.format("R$ %.2f", item.getProduto().getPreco() * item.getQuantidade());
+            case 4:
+                return "Remover";
+            default:
+                return null;
+        }
+    }
 
-        return switch (columnIndex) {
-            case 0 -> produto.getNome();
-            case 1 -> item.getQuantidade();
-            case 2 -> String.format("R$ %.2f", item.getValor_unitario());
-            case 3 -> String.format("R$ %.2f", item.getQuantidade() * item.getValor_unitario());
-            default -> null;
-        };
+    public boolean isCellEditable(int rowIndex, int columnIndex) {
+        return columnIndex == 4; // Só a coluna "Ação" é editável
     }
 
     public void adicionarProduto(ProdutoEntity produto, int quantidade) {
@@ -57,7 +66,7 @@ public class ProdutoVendaTableModel extends AbstractTableModel {
     public void removerItem(int rowIndex) {
         if (rowIndex >= 0 && rowIndex < itens.size()) {
             itens.remove(rowIndex);
-            fireTableRowsDeleted(rowIndex, rowIndex);
+            fireTableDataChanged();
         }
     }
 
@@ -65,4 +74,7 @@ public class ProdutoVendaTableModel extends AbstractTableModel {
         itens.clear();
         fireTableDataChanged();
     }
+
+
 }
+

@@ -2,7 +2,7 @@ package models.entity;
 
 public class ItensVendaEntity {
     private long venda;
-    private ProdutoEntity produto; 
+    private ProdutoEntity produto;
     private long quantidade;
     private double valor_unitario;
 
