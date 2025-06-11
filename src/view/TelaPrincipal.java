@@ -12,7 +12,7 @@ public class TelaPrincipal implements Tela {
 
     private JPanel background;
     private JButton listarProdutosButton;
-    private JButton vendasButton;
+    private JButton relatorioVendasButton;
     private JButton cadastrarProdutoButton;
     private JButton cadastrarVendasButton;
     private JButton cadastrarAfiliadoButton;
@@ -37,6 +37,9 @@ public class TelaPrincipal implements Tela {
         });
         cadastrarVendasButton.addActionListener(_ -> {
             ViewManager.setScreen(new CadastroVenda());
+        });
+        relatorioVendasButton.addActionListener(_ -> {
+            ViewManager.setScreen(new RelatorioVendas());
         });
     }
 
