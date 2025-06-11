@@ -1,5 +1,6 @@
 package models.table;
 
+import controllers.VendaController;
 import models.dto.VendaRelatorioDTO;
 
 import javax.swing.table.AbstractTableModel;
@@ -22,7 +23,7 @@ public class VendasTableModel extends AbstractTableModel {
             case 0: return venda.getId();
             case 1: return venda.getCpf().replaceAll("(\\d{3})(\\d{3})(\\d{3})(\\d{2})", "$1.$2.$3-$4");
             case 2: return venda.getMetodoPagamento();
-            case 3: return venda.getDataVenda().toLocalDate();
+            case 3: return venda.getDataVenda().toString();
             case 4: return "R$ %.2f".formatted(venda.getValorTotal());
             default: return null;
         }
@@ -38,7 +39,8 @@ public class VendasTableModel extends AbstractTableModel {
         return colunas[column];
     }
 
-    void atualizarDados(String periodo, String metodoPagamento, String cpf) {
+    public void atualizarDados(String periodo, long metodoPagamento, String cpf) {
+        vendas = VendaController.listarVendas(periodo, metodoPagamento, cpf);
         fireTableDataChanged();
     }
 }

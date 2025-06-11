@@ -1,15 +1,16 @@
 package models.dto;
 
 import java.time.LocalDateTime;
+import java.util.Date;
 
 public class VendaRelatorioDTO {
     private long id;
     private String cpf;
     private String metodoPagamento;
-    private LocalDateTime dataVenda;
+    private Date dataVenda;
     private double valorTotal;
 
-    public VendaRelatorioDTO(long id, String cpf, String metodoPagamento, LocalDateTime dataVenda, double valorTotal) {
+    public VendaRelatorioDTO(long id, String cpf, String metodoPagamento, Date dataVenda, double valorTotal) {
         this.id = id;
         this.cpf = cpf;
         this.metodoPagamento = metodoPagamento;
@@ -41,11 +42,11 @@ public class VendaRelatorioDTO {
         this.metodoPagamento = metodoPagamento;
     }
 
-    public LocalDateTime getDataVenda() {
+    public Date getDataVenda() {
         return dataVenda;
     }
 
-    public void setDataVenda(LocalDateTime dataVenda) {
+    public void setDataVenda(Date dataVenda) {
         this.dataVenda = dataVenda;
     }
 

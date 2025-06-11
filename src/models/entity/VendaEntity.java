@@ -4,30 +4,8 @@ import java.time.LocalDateTime;
 
 public class VendaEntity {
     private long id;
+    private String cpf;
+    private long met_pag;
     private LocalDateTime data;
     private double valor;
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public LocalDateTime getData() {
-        return data;
-    }
-
-    public void setData(LocalDateTime data) {
-        this.data = data;
-    }
-
-    public double getValor() {
-        return valor;
-    }
-
-    public void setValor(double valor) {
-        this.valor = valor;
-    }
 }

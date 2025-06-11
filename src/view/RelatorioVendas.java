@@ -10,7 +10,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class RelatorioVendas implements Tela {
-    private static final int WIDTH = 800;
+    private static final int WIDTH = 500;
     private static final int HEIGHT = 600;
 
     private JPanel background;
@@ -51,6 +51,8 @@ public class RelatorioVendas implements Tela {
             metPagCombobox.setSelectedItem(todos);
 
             periodoCombobox.setSelectedItem("Todos");
+
+            model.atualizarDados((String)periodoCombobox.getSelectedItem(), ((MetodoPagamentoEntity)metPagCombobox.getSelectedItem()).getId(), cpfInput.getText());
         });
     }
 }
