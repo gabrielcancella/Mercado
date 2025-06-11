@@ -1,5 +1,6 @@
 package view;
 
+import controllers.AfiliadoController;
 import controllers.ProdutoController;
 import controllers.VendaController;
 import models.entity.ItensVendaEntity;
@@ -39,6 +40,24 @@ public class CadastroVenda implements Tela {
         produtos.getColumn("Ação").setCellRenderer(new ButtonRenderer());
         produtos.getColumn("Ação").setCellEditor(new ButtonEditor(new JCheckBox(), tableModel, this));
 
+        compradorField.setForeground(Color.GRAY);
+        compradorField.setText("Digite o CPF (opcional)");
+
+        compradorField.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent e) {
+                if (compradorField.getText().equals("Digite o CPF (opcional)")) {
+                    compradorField.setText("");
+                    compradorField.setForeground(Color.BLACK);
+                }
+            }
+
+            public void focusLost(java.awt.event.FocusEvent e) {
+                if (compradorField.getText().trim().isEmpty()) {
+                    compradorField.setForeground(Color.GRAY);
+                    compradorField.setText("Digite o CPF (opcional)");
+                }
+            }
+        });
 
 
         popularCombos();
@@ -90,7 +109,29 @@ public class CadastroVenda implements Tela {
             tableModel.adicionarProduto(produtoSelecionado, quantidade);
             atualizarValorTotal();
         });
+
         realizarVenda.addActionListener(e -> {
+            String cpf = compradorField.getText().trim();
+            boolean afiliadoExiste = false;
+
+            if (!cpf.isEmpty() && !cpf.equals("Digite o CPF (opcional)")) {
+                if (!cpf.matches("\\d{11}|\\d{3}\\.\\d{3}\\.\\d{3}-\\d{2}")) {
+                    JOptionPane.showMessageDialog(null, "Formato de CPF inválido.\nDigite 11 dígitos ou no formato 000.000.000-00.");
+                    return;
+                }
+
+                cpf = cpf.replaceAll("\\D", ""); // Remove pontos e traço
+
+                if (AfiliadoController.conferirAfiliado(cpf)) {
+                    afiliadoExiste = true;
+                } else {
+                    JOptionPane.showMessageDialog(null, "CPF não encontrado entre os afiliados.");
+                    return;
+                }
+            }
+
+
+
             double valorTotal = 0.0;
             List<ItensVendaEntity> itens = tableModel.getItens();
 
@@ -101,6 +142,10 @@ public class CadastroVenda implements Tela {
 
             for (ItensVendaEntity item : itens) {
                 valorTotal += item.getProduto().getPreco() * item.getQuantidade();
+            }
+
+            if (afiliadoExiste) {
+                valorTotal *= 0.9; // Aplica 10% de desconto
             }
 
             VendaEntity venda = new VendaEntity();
@@ -116,15 +161,24 @@ public class CadastroVenda implements Tela {
                     VendaController.salvarItem(item);
                 }
 
-                JOptionPane.showMessageDialog(null, "Venda realizada com sucesso!");
+                if (afiliadoExiste) {
+                    JOptionPane.showMessageDialog(null,
+                            String.format("Venda efetuada com sucesso!\nValor final com 10%% de desconto: R$ %.2f", valorTotal),
+                            "Venda Concluída com Desconto",
+                            JOptionPane.INFORMATION_MESSAGE);
+                } else {
+                    JOptionPane.showMessageDialog(null, "Venda realizada com sucesso!");
+                }
 
                 tableModel.limpar();
                 atualizarValorTotal();
+                compradorField.setText(""); // Limpa o campo CPF
 
             } else {
                 JOptionPane.showMessageDialog(null, "Erro ao salvar a venda.");
             }
         });
+
 
     }
 

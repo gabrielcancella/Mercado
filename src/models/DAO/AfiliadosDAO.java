@@ -25,11 +25,11 @@ public class AfiliadosDAO {
         }
     }
 
-    public static boolean afiliadoExiste(AfiliadoEntity afiliado) {
+    public static boolean afiliadoExiste(String cpf) {
         String sql = "SELECT COUNT(*) FROM afiliados WHERE cpf = ?";
 
         try (PreparedStatement stmt = MySQLConnection.getConnection().prepareStatement(sql)) {
-            stmt.setString(1, afiliado.getCpf());
+            stmt.setString(1, cpf);
             ResultSet rs = stmt.executeQuery();
             if (rs.next()) {
                 return rs.getInt(1) > 0;
@@ -39,5 +39,4 @@ public class AfiliadosDAO {
         }
         return false;
     }
-
 }

@@ -9,7 +9,7 @@ public class AfiliadoController {
 
     public static boolean cadastrarAfiliado(AfiliadoEntity afiliado) {
         try {
-            if (!AfiliadosDAO.afiliadoExiste(afiliado)) {
+            if (!AfiliadosDAO.afiliadoExiste(afiliado.getCpf())) {
                 AfiliadosDAO.cadastro(afiliado);
                 return true;
             }
@@ -19,4 +19,9 @@ public class AfiliadoController {
             return false;
         }
     }
+
+    public static boolean conferirAfiliado(String cpf) {
+        return AfiliadosDAO.afiliadoExiste(cpf);
+    }
 }
+

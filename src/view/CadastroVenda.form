@@ -32,7 +32,7 @@
           </grid>
         </constraints>
         <properties>
-          <text value="123.456.789-01"/>
+          <text value=""/>
           <toolTipText value="Digite o CPF do comprador"/>
         </properties>
       </component>
