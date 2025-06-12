@@ -4,6 +4,7 @@ import controllers.AfiliadoController;
 import controllers.ProdutoController;
 import controllers.VendaController;
 import models.entity.ItensVendaEntity;
+import models.entity.MetodoPagamentoEntity;
 import models.entity.ProdutoEntity;
 import models.entity.VendaEntity;
 import models.interfaces.Tela;
@@ -26,13 +27,12 @@ public class CadastroVenda implements Tela {
     private JScrollPane ListaVenda;
     private JLabel valorTotalLabel; // Apenas JLabel agora
     private JButton realizarVenda;
+    private JComboBox met_pagBox;
 
     private ProdutoVendaTableModel tableModel;
 
     public CadastroVenda() {
         ViewManager.setWindowSize(500, 600);
-
-        createUIComponents();
 
         tableModel = new ProdutoVendaTableModel();
         produtos.setModel(tableModel);
@@ -64,35 +64,28 @@ public class CadastroVenda implements Tela {
         configurarBotoes();
     }
 
-    private void createUIComponents() {
-        SwingUtilities.invokeLater(() -> {
-            List<ProdutoEntity> produtos = ProdutoController.getAllProdutos();
-            for (ProdutoEntity produto : produtos) {
-                produtoBox.addItem(produto);
-            }
-            produtoBox.setSelectedItem(null);
-        });
-
-        for (int i = 1; i <= 50; i++) {
-            quantidadeBox.addItem(String.valueOf(i));
-        }
-    }
-
     private void popularCombos() {
-        List<ProdutoEntity> lista = ProdutoController.getAllProdutos();
+        produtos.setFont(new Font("SansSerif", Font.PLAIN, 12));
+        produtos.setRowHeight(16);
+
         produtoBox.removeAllItems();
-        for (ProdutoEntity produto : lista) {
+        List<ProdutoEntity> produtosList = ProdutoController.getAllProdutos();
+        for (ProdutoEntity produto : produtosList) {
             produtoBox.addItem(produto);
         }
         produtoBox.setSelectedItem(null);
-
-        produtos.setFont(new Font("SansSerif", Font.PLAIN, 12));
-        produtos.setRowHeight(16);
 
         quantidadeBox.removeAllItems();
         for (int i = 1; i <= 50; i++) {
             quantidadeBox.addItem(String.valueOf(i));
         }
+
+        met_pagBox.removeAllItems();
+        List<MetodoPagamentoEntity> metodos = models.DAO.MetodoPagamentoDAO.getAll();
+        for (MetodoPagamentoEntity metodo : metodos) {
+            met_pagBox.addItem(metodo);
+        }
+        met_pagBox.setSelectedItem(null);
     }
 
     private void configurarBotoes() {
@@ -148,7 +141,15 @@ public class CadastroVenda implements Tela {
                 valorTotal *= 0.9; // Aplica 10% de desconto
             }
 
+            MetodoPagamentoEntity metodoSelecionado = (MetodoPagamentoEntity) met_pagBox.getSelectedItem();
+            if (metodoSelecionado == null) {
+                JOptionPane.showMessageDialog(null, "Selecione o método de pagamento.");
+                return;
+            }
+
             VendaEntity venda = new VendaEntity();
+            venda.setCpf(cpf.isEmpty() || cpf.equals("Digite o CPF (opcional)") ? null : cpf);
+            venda.setMet_pag(metodoSelecionado.getId());
             venda.setData(java.time.LocalDateTime.now());
             venda.setValor(valorTotal);
 
@@ -172,7 +173,7 @@ public class CadastroVenda implements Tela {
 
                 tableModel.limpar();
                 atualizarValorTotal();
-                compradorField.setText(""); // Limpa o campo CPF
+                compradorField.setText("");
 
             } else {
                 JOptionPane.showMessageDialog(null, "Erro ao salvar a venda.");
