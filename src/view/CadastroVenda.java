@@ -28,6 +28,7 @@ public class CadastroVenda implements Tela {
     private JLabel valorTotalLabel; // Apenas JLabel agora
     private JButton realizarVenda;
     private JComboBox met_pagBox;
+    private JButton voltarButton;
 
     private ProdutoVendaTableModel tableModel;
 
@@ -57,6 +58,10 @@ public class CadastroVenda implements Tela {
                     compradorField.setText("Digite o CPF (opcional)");
                 }
             }
+        });
+
+        voltarButton.addActionListener(_ -> {
+            ViewManager.backToMainScreen();
         });
 
 
