@@ -6,12 +6,13 @@ import models.interfaces.Tela;
 import models.table.VendasTableModel;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableCellRenderer;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class RelatorioVendas implements Tela {
-    private static final int WIDTH = 500;
-    private static final int HEIGHT = 600;
+    public static final int WIDTH = 600;
+    public static final int HEIGHT = 600;
 
     private JPanel background;
     private JTable vendasTable;
@@ -22,8 +23,13 @@ public class RelatorioVendas implements Tela {
     private JButton voltarButton;
 
     public RelatorioVendas() {
-        ViewManager.setWindowSize(WIDTH, HEIGHT);
-
+        buscarButton.addActionListener(_ -> {
+            ((VendasTableModel)vendasTable.getModel()).atualizarDados(
+                (String) periodoCombobox.getSelectedItem(),
+                ((MetodoPagamentoEntity) metPagCombobox.getSelectedItem()).getId(),
+                cpfInput.getText().trim().isEmpty() ? null : cpfInput.getText()
+            );
+        });
         voltarButton.addActionListener(_ -> {
             ViewManager.backToMainScreen();
         });
@@ -42,6 +48,16 @@ public class RelatorioVendas implements Tela {
             vendasTable.setModel(model);
             vendasTable.setAutoCreateRowSorter(true);
             vendasTable.setFocusable(false);
+            vendasTable.getColumnModel().getColumn(0).setPreferredWidth(50); // ID
+            vendasTable.getColumnModel().getColumn(1).setPreferredWidth(200); // CPF
+            vendasTable.getColumnModel().getColumn(2).setPreferredWidth(175); // Data
+            vendasTable.getColumnModel().getColumn(3).setPreferredWidth(120); // Valor
+
+            DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
+            centerRenderer.setHorizontalAlignment(JLabel.CENTER);
+            for (int i = 0; i < vendasTable.getColumnCount(); i++) {
+                vendasTable.getColumnModel().getColumn(i).setCellRenderer(centerRenderer);
+            }
 
             MetodoPagamentoController.getAll().forEach((MetodoPagamentoEntity metodo) -> {;
                 metPagCombobox.addItem(metodo);
@@ -52,7 +68,7 @@ public class RelatorioVendas implements Tela {
 
             periodoCombobox.setSelectedItem("Todos");
 
-            model.atualizarDados((String)periodoCombobox.getSelectedItem(), ((MetodoPagamentoEntity)metPagCombobox.getSelectedItem()).getId(), cpfInput.getText());
+            model.atualizarDados((String)periodoCombobox.getSelectedItem(), ((MetodoPagamentoEntity) metPagCombobox.getSelectedItem()).getId(), cpfInput.getText());
         });
     }
 }

@@ -21,7 +21,7 @@ public class VendasTableModel extends AbstractTableModel {
         VendaRelatorioDTO venda = vendas.get(rowIndex);
         switch (columnIndex) {
             case 0: return venda.getId();
-            case 1: return venda.getCpf().replaceAll("(\\d{3})(\\d{3})(\\d{3})(\\d{2})", "$1.$2.$3-$4");
+            case 1: return venda.getCpf() != null ? venda.getCpf().replaceAll("(\\d{3})(\\d{3})(\\d{3})(\\d{2})", "$1.$2.$3-$4") : "N/A";
             case 2: return venda.getMetodoPagamento();
             case 3: return venda.getDataVenda().toString();
             case 4: return "R$ %.2f".formatted(venda.getValorTotal());

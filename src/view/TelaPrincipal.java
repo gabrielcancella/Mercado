@@ -3,12 +3,10 @@ package view;
 import models.interfaces.Tela;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class TelaPrincipal implements Tela {
-    private final int WIDTH = 400;
-    private final int HEIGHT = 230;
+    public static final int WIDTH = 400;
+    public static final int HEIGHT = 230;
 
     private JPanel background;
     private JButton listarProdutosButton;
@@ -18,10 +16,9 @@ public class TelaPrincipal implements Tela {
     private JButton cadastrarAfiliadoButton;
     private JButton listarAfiliadosButton;
     private JButton categoriasButton;
+    private JButton fornecedoresButton;
 
     public TelaPrincipal() {
-        ViewManager.setWindowSize(this.WIDTH, this.HEIGHT);
-
         cadastrarProdutoButton.addActionListener(_ -> {
             ViewManager.setScreen(new CadastroProduto());
         });
@@ -40,6 +37,9 @@ public class TelaPrincipal implements Tela {
         });
         relatorioVendasButton.addActionListener(_ -> {
             ViewManager.setScreen(new RelatorioVendas());
+        });
+        fornecedoresButton.addActionListener(_ -> {
+            ViewManager.setScreen(new Fornecedores());
         });
     }
 

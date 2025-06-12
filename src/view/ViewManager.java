@@ -41,6 +41,21 @@ public class ViewManager {
             frame.setContentPane(tela.getBackground());
             frame.revalidate();
             frame.repaint();
+
+            int width = Tela.WIDTH;
+            int height = Tela.HEIGHT;
+
+            try {
+                Class<?> telaClass = tela.getClass();
+                width = telaClass.getDeclaredField("WIDTH").getInt(null);
+                height = telaClass.getDeclaredField("HEIGHT").getInt(null);
+            } catch (Exception e) {
+                System.out.println("Usando dimensões padrão da interface Tela");
+                System.out.println("WIDTH padrão: " + width);
+                System.out.println("HEIGHT padrão: " + height);
+            }
+
+            setWindowSize(width, height);
         });
     }
 
@@ -61,6 +76,8 @@ public class ViewManager {
             frame.setContentPane(telaPrincipal.getBackground());
             frame.revalidate();
             frame.repaint();
+
+            setWindowSize(TelaPrincipal.WIDTH, TelaPrincipal.HEIGHT);
         });
     }
 

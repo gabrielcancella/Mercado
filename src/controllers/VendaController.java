@@ -20,7 +20,7 @@ public class VendaController {
     }
 
     public static List<VendaRelatorioDTO> listarVendas(String periodo, long met_pag, String cpf) {
-        String cpfLimpo = cpf.replaceAll("[^0-9]", "");
+        String cpfLimpo = cpf != null ? cpf.replaceAll("[^0-9]", "") : "";
         Date data;
         if (periodo == null || periodo.isEmpty() || periodo.equalsIgnoreCase("Todos")) {
             data = null;

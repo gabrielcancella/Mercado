@@ -7,6 +7,9 @@ import models.table.CategoriaTableModel;
 import javax.swing.*;
 
 public class Categorias implements Tela {
+    public static final int WIDTH = 500;
+    public static final int HEIGHT = 400;
+
     private JPanel background;
     private JTextField nomeCategoriaInput;
     private JButton adicionarCategoriaButton;
@@ -17,7 +20,6 @@ public class Categorias implements Tela {
     private JButton voltarButton;
 
     public Categorias() {
-        ViewManager.setWindowSize(this.WIDTH, this.HEIGHT);
         voltarButton.addActionListener(_ -> {
             ViewManager.backToMainScreen();
         });

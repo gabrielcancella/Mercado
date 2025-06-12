@@ -17,6 +17,9 @@ import java.awt.*;
 import java.util.List;
 
 public class CadastroVenda implements Tela {
+    public static final int WIDTH = 800;
+    public static final int HEIGHT = 600;
+
     private JPanel background;
     private JTextField compradorField;
     private JTable produtos;
@@ -33,8 +36,6 @@ public class CadastroVenda implements Tela {
     private ProdutoVendaTableModel tableModel;
 
     public CadastroVenda() {
-        ViewManager.setWindowSize(500, 600);
-
         tableModel = new ProdutoVendaTableModel();
         produtos.setModel(tableModel);
 

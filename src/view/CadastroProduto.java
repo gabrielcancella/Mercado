@@ -12,8 +12,8 @@ import java.awt.event.ActionListener;
 import java.util.List;
 
 public class CadastroProduto implements Tela {
-    private static final int WIDTH = 450;
-    private static final int HEIGHT = 330;
+    public static final int WIDTH = 450;
+    public static final int HEIGHT = 330;
 
     private JPanel background;
     private JTextField inputNome;
@@ -25,8 +25,6 @@ public class CadastroProduto implements Tela {
     private JButton voltarButton;
 
     public CadastroProduto() {
-        ViewManager.setWindowSize(this.WIDTH, this.HEIGHT);
-
         this.getLimparCamposButton().addActionListener(_ -> {
             this.limparCampos();
         });

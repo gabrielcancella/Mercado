@@ -7,15 +7,14 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
 
 public class ListaProdutos implements Tela {
-    private static final int WIDTH = 650;
-    private static final int HEIGHT = 400;
+    public static final int WIDTH = 650;
+    public static final int HEIGHT = 400;
 
     private JPanel background;
     private JTable table;
     private JButton voltarButton;
 
     public ListaProdutos() {
-        ViewManager.setWindowSize(this.WIDTH, this.HEIGHT);
         voltarButton.addActionListener(_ -> {
             ViewManager.backToMainScreen();
         });

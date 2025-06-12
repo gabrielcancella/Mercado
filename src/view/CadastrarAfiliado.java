@@ -9,8 +9,8 @@ import javax.swing.*;
 import java.sql.Date;
 
 public class CadastrarAfiliado implements Tela {
-    private int WIDTH = 350;
-    private int HEIGHT = 330;
+    public static final int WIDTH = 350;
+    public static final int HEIGHT = 330;
 
     private JPanel background;
     private JTextField nomeField;

@@ -6,6 +6,21 @@ public class FornecedorEntity {
     private String telefone;
     private String email;
 
+    public FornecedorEntity() {}
+
+    public FornecedorEntity(String nome, String telefone, String email) {
+        this.nome = nome;
+        this.telefone = telefone;
+        this.email = email;
+    }
+
+    public FornecedorEntity(long id, String nome, String telefone, String email) {
+        this.id = id;
+        this.nome = nome;
+        this.telefone = telefone;
+        this.email = email;
+    }
+
     public long getId() {
         return id;
     }
