@@ -5,8 +5,6 @@ import models.table.AfiliadosTableModel;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class ListaAfiliados implements Tela {
     public static final int WIDTH = 600;
@@ -28,7 +26,6 @@ public class ListaAfiliados implements Tela {
     }
 
     private void createUIComponents() {
-        // TODO: place custom component creation code here
         afiliadosTable = new JTable();
         SwingUtilities.invokeLater(() -> {
             AfiliadosTableModel model = new AfiliadosTableModel();

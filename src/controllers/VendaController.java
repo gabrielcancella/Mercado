@@ -33,6 +33,8 @@ public class VendaController {
             data = new Date(System.currentTimeMillis() - 30 * 24 * 60 * 60 * 1000);
         } else if (periodo.equalsIgnoreCase("Últimos 60 dias")) {
             data = new Date(System.currentTimeMillis() - 60 * 24 * 60 * 60 * 1000);
+        } else if (periodo.equalsIgnoreCase("Últimos 90 dias")) {
+            data = new Date(System.currentTimeMillis() - 90 * 24 * 60 * 60 * 1000);
         } else {
             data = new Date(System.currentTimeMillis() - 90 * 24 * 60 * 60 * 1000);
         }
