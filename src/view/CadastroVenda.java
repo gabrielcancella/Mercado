@@ -28,7 +28,7 @@ public class CadastroVenda implements Tela {
     private JComboBox quantidadeBox;
     private JButton adicionarProdutoButton;
     private JScrollPane ListaVenda;
-    private JLabel valorTotalLabel; // Apenas JLabel agora
+    private JLabel valorTotalLabel; 
     private JButton realizarVenda;
     private JComboBox met_pagBox;
     private JButton voltarButton;
@@ -119,7 +119,7 @@ public class CadastroVenda implements Tela {
                     return;
                 }
 
-                cpf = cpf.replaceAll("\\D", ""); // Remove pontos e traço
+                cpf = cpf.replaceAll("\\D", "");
 
                 if (AfiliadoController.conferirAfiliado(cpf)) {
                     afiliadoExiste = true;
