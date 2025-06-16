@@ -138,7 +138,9 @@ public class CadastroVenda implements Tela {
                 JOptionPane.showMessageDialog(null, "Adicione ao menos um produto.");
                 return;
             }
-
+            for (ItensVendaEntity item : itens) {
+                valorTotal += item.getProduto().getPreco() * item.getQuantidade();
+            }
 
             for (ItensVendaEntity item : itens) {
                 if (!VendaController.possuiEstoque(item)) {
