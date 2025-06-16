@@ -28,7 +28,7 @@ public class CadastroVenda implements Tela {
     private JComboBox quantidadeBox;
     private JButton adicionarProdutoButton;
     private JScrollPane ListaVenda;
-    private JLabel valorTotalLabel; 
+    private JLabel valorTotalLabel;
     private JButton realizarVenda;
     private JComboBox met_pagBox;
     private JButton voltarButton;
