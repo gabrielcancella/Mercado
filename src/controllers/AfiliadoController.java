@@ -3,9 +3,18 @@ package controllers;
 import models.DAO.AfiliadosDAO;
 import models.entity.AfiliadoEntity;
 
-import java.sql.SQLException;
+import java.util.List;
 
 public class AfiliadoController {
+
+    public static List<AfiliadoEntity> listaAfiliados() {
+        try {
+            return AfiliadosDAO.getAfiliados();
+        } catch (Exception e) {
+            System.out.println("Erro ao buscar afiliados: %s".formatted(e.getMessage()));
+            return List.of();
+        }
+    }
 
     public static boolean cadastrarAfiliado(AfiliadoEntity afiliado) {
         try {

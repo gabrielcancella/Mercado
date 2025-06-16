@@ -5,7 +5,7 @@ import models.interfaces.Tela;
 import javax.swing.*;
 import java.awt.*;
 
-public class ViewManager {
+public final class ViewManager {
     private static ViewManager instance = null;
     private JFrame frame;
 
@@ -50,9 +50,6 @@ public class ViewManager {
                 width = telaClass.getDeclaredField("WIDTH").getInt(null);
                 height = telaClass.getDeclaredField("HEIGHT").getInt(null);
             } catch (Exception e) {
-                System.out.println("Usando dimensões padrão da interface Tela");
-                System.out.println("WIDTH padrão: " + width);
-                System.out.println("HEIGHT padrão: " + height);
             }
 
             setWindowSize(width, height);

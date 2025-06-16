@@ -10,6 +10,9 @@ public class AfiliadoEntity {
     private String cpf;
     private Date nascimento;
 
+    public AfiliadoEntity() {
+
+    }
     public AfiliadoEntity(String nome, String sobrenome, String cpf, Date nascimento) {
         this.nome = nome;
         this.sobrenome = sobrenome;
