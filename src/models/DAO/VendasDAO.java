@@ -73,4 +73,13 @@ public class VendasDAO {
             return vendas;
         }
     }
+    public static void excluir(long vendaId) {
+        String sql = "DELETE FROM vendas WHERE id = ?";
+        try (PreparedStatement stmt = MySQLConnection.getConnection().prepareStatement(sql)) {
+            stmt.setLong(1, vendaId);
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }

@@ -51,11 +51,21 @@ public class ProdutoVendaTableModel extends AbstractTableModel {
     }
 
     public void adicionarProduto(ProdutoEntity produto, int quantidade) {
-        ItensVendaEntity item = new ItensVendaEntity();
-        item.setProduto(produto);
-        item.setQuantidade(quantidade);
-        item.setValor_unitario(produto.getPreco());
-        itens.add(item);
+        for (int i = 0; i < itens.size(); i++) {
+            ItensVendaEntity item = itens.get(i);
+
+            if (item.getProduto().getId() == produto.getId()) {
+                long novaQtd = item.getQuantidade() + quantidade;
+                item.setQuantidade(novaQtd);
+                fireTableRowsUpdated(i, i);
+                return;
+            }
+        }
+        ItensVendaEntity novoItem = new ItensVendaEntity();
+        novoItem.setProduto(produto);
+        novoItem.setQuantidade(quantidade);
+        novoItem.setValor_unitario(produto.getPreco());
+        itens.add(novoItem);
         fireTableRowsInserted(itens.size() - 1, itens.size() - 1);
     }
 

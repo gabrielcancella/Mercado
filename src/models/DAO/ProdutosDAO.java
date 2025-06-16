@@ -5,16 +5,18 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+
 import connection.MySQLConnection;
+import models.entity.ItensVendaEntity;
 import models.entity.ProdutoComCategoriaEntity;
 import models.entity.ProdutoEntity;
 
 public class ProdutosDAO {
-    public static List<ProdutoEntity> getAll(){
+    public static List<ProdutoEntity> getAll() {
         String sql = "SELECT * FROM produtos";
         List<ProdutoEntity> produtos = new ArrayList<>();
 
-        try (PreparedStatement stmt = MySQLConnection.getConnection().prepareStatement(sql)){
+        try (PreparedStatement stmt = MySQLConnection.getConnection().prepareStatement(sql)) {
             ResultSet rs = stmt.executeQuery();
 
             while (rs.next()) {
@@ -37,16 +39,16 @@ public class ProdutosDAO {
 
     public static List<ProdutoComCategoriaEntity> getAllComCategoria() {
         String sql = """
-            SELECT p.id, p.nome, p.preco, p.quantidade, c.nome AS categoria
-            FROM produtos p
-            JOIN categorias c ON p.categoria = c.id
-        """;
+                    SELECT p.id, p.nome, p.preco, p.quantidade, c.nome AS categoria
+                    FROM produtos p
+                    JOIN categorias c ON p.categoria = c.id
+                """;
         List<ProdutoComCategoriaEntity> produtos = new ArrayList<>();
 
-        try (PreparedStatement stmt = MySQLConnection.getConnection().prepareStatement(sql)){
+        try (PreparedStatement stmt = MySQLConnection.getConnection().prepareStatement(sql)) {
             ResultSet rs = stmt.executeQuery();
 
-            while (rs.next()){
+            while (rs.next()) {
                 long id = rs.getLong("id");
                 String nome = rs.getString("nome");
                 String categoria = rs.getString("categoria");
@@ -79,7 +81,7 @@ public class ProdutosDAO {
         }
     }
 
-    public static boolean produtoExiste(ProdutoEntity produto){
+    public static boolean produtoExiste(ProdutoEntity produto) {
         String sql = "SELECT COUNT(*) FROM produtos WHERE nome = ?";
 
         try (PreparedStatement stmt = MySQLConnection.getConnection().prepareStatement(sql)) {
@@ -105,6 +107,48 @@ public class ProdutosDAO {
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
+        }
+    }
+
+    public static void subtrair(ItensVendaEntity item) {
+        String sql = "UPDATE produtos SET quantidade = quantidade - ? WHERE id = ?";
+
+        try (PreparedStatement stmt = MySQLConnection.getConnection().prepareStatement(sql)) {
+            stmt.setLong(1, item.getQuantidade());
+            stmt.setLong(2, item.getProduto().getId());
+
+            stmt.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static int quantidadeEstoque(ItensVendaEntity item) {
+        String sql = "SELECT quantidade FROM produtos WHERE id = ?";
+
+        try (PreparedStatement stmt = MySQLConnection.getConnection().prepareStatement(sql)) {
+            stmt.setLong(1, item.getProduto().getId());
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                return rs.getInt("quantidade");
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return 0;
+    }
+
+    public static void adicionar(ItensVendaEntity item) {
+        String sql = "UPDATE produtos SET quantidade = quantidade + ? WHERE id = ?";
+
+        try (PreparedStatement stmt = MySQLConnection.getConnection().prepareStatement(sql)) {
+            stmt.setLong(1, item.getQuantidade());
+            stmt.setLong(2, item.getProduto().getId());
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
 }

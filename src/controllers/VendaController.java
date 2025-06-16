@@ -1,6 +1,7 @@
 package controllers;
 
 import models.DAO.ItensVendaDAO;
+import models.DAO.ProdutosDAO;
 import models.DAO.VendasDAO;
 import models.dto.VendaRelatorioDTO;
 import models.entity.ItensVendaEntity;
@@ -38,6 +39,36 @@ public class VendaController {
 
         return VendasDAO.getAllRelatorio(data, met_pag, cpfLimpo);
     }
+
+    public static boolean possuiEstoque(ItensVendaEntity item) {
+        try {
+            return ProdutosDAO.quantidadeEstoque(item) >= item.getQuantidade();
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    public static boolean retirarEstoque(ItensVendaEntity item) {
+        try {
+            if (possuiEstoque(item)) {
+                ProdutosDAO.subtrair(item);
+                return true;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    public static void cancelarVenda(long vendaId, List<ItensVendaEntity> itens) {
+
+        for (ItensVendaEntity item : itens) {
+            ProdutosDAO.adicionar(item);
+        }
+        ItensVendaDAO.excluirPorVenda(vendaId);
+        VendasDAO.excluir(vendaId);
+    }
 }
+
 
 

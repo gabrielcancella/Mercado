@@ -26,4 +26,17 @@ public class ItensVendaDAO {
             e.printStackTrace();
         }
     }
+
+
+    public static void excluirPorVenda(long vendaId) {
+        String sql = "DELETE FROM itens_venda WHERE venda = ?";
+        try (PreparedStatement stmt = MySQLConnection.getConnection().prepareStatement(sql)) {
+            stmt.setLong(1, vendaId);
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+    }
+
 }

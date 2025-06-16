@@ -139,8 +139,15 @@ public class CadastroVenda implements Tela {
                 return;
             }
 
+
             for (ItensVendaEntity item : itens) {
-                valorTotal += item.getProduto().getPreco() * item.getQuantidade();
+                if (!VendaController.possuiEstoque(item)) {
+                    JOptionPane.showMessageDialog(null,
+                            String.format("Estoque insuficiente para o produto '%s'.", item.getProduto().getNome()),
+                            "Erro de Estoque",
+                            JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
             }
 
             if (afiliadoExiste) {
@@ -162,6 +169,15 @@ public class CadastroVenda implements Tela {
             long vendaId = VendaController.concluirVenda(venda);
 
             if (vendaId > 0) {
+                for (ItensVendaEntity item : itens) {
+                    if (!VendaController.retirarEstoque(item)) {
+                        JOptionPane.showMessageDialog(null,
+                                "Falha ao baixar estoque. Operação cancelada.",
+                                "Erro", JOptionPane.ERROR_MESSAGE);
+                        VendaController.cancelarVenda(vendaId, itens);
+                        return;
+                    }
+                }
                 for (ItensVendaEntity item : itens) {
                     item.setVenda(vendaId);
                     item.setValor_unitario(item.getProduto().getPreco());
