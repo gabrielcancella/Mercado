@@ -1,6 +1,7 @@
 package view;
 
 import controllers.AfiliadoController;
+import controllers.MetodoPagamentoController;
 import controllers.ProdutoController;
 import controllers.VendaController;
 import models.entity.ItensVendaEntity;
@@ -17,13 +18,12 @@ import java.awt.*;
 import java.util.List;
 
 public class CadastroVenda implements Tela {
-    public static final int WIDTH = 800;
+    public static final int WIDTH = 600;
     public static final int HEIGHT = 600;
 
     private JPanel background;
     private JTextField compradorField;
     private JTable produtos;
-    private JEditorPane editorPane1;
     private JComboBox produtoBox;
     private JComboBox quantidadeBox;
     private JButton adicionarProdutoButton;
@@ -87,7 +87,7 @@ public class CadastroVenda implements Tela {
         }
 
         met_pagBox.removeAllItems();
-        List<MetodoPagamentoEntity> metodos = models.DAO.MetodoPagamentoDAO.getAll();
+        List<MetodoPagamentoEntity> metodos = MetodoPagamentoController.getAll();
         for (MetodoPagamentoEntity metodo : metodos) {
             met_pagBox.addItem(metodo);
         }
@@ -144,7 +144,7 @@ public class CadastroVenda implements Tela {
             }
 
             if (afiliadoExiste) {
-                valorTotal *= 0.9; // Aplica 10% de desconto
+                valorTotal *= 0.9;
             }
 
             MetodoPagamentoEntity metodoSelecionado = (MetodoPagamentoEntity) met_pagBox.getSelectedItem();
