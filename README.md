@@ -26,7 +26,7 @@ Criar uma aplicação de controle de estoque local para mercados, permitindo:
 
 ## Funcionalidades previstas
 
-- Conexão com banco SQL Server
+- Conexão com banco MySQL
 - Modelos: Produto, Venda, ItemVenda, etc.
 - DAOs para acesso ao banco
 - Controllers com regras de negócio
